@@ -1,9 +1,8 @@
 ﻿
-#include <LcsLib.h>
+#include "LcsLib.h"
 #include <stdio.h>
 
 #include "GameHeader.h"
-
 
 int g_GamePhase = GAME_INIT;
 

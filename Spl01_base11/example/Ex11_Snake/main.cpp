@@ -1,17 +1,11 @@
-﻿#pragma comment(lib, "legacy_stdio_definitions.lib")
-
-
-// This is a earthworm game.
+﻿// This is a earthworm game.
 //
 // Author: 박세연(청강대학교: parkse83@hotmail.com)
 // Date  : 2006-06-16
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-
 #include "_StdAfx.h"
-
-
 
 int g_GameState = GM_START;
 int g_nFont1;

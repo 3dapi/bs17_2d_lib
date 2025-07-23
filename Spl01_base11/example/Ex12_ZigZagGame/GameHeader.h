@@ -1,6 +1,4 @@
-﻿
-
-#pragma once
+﻿#pragma once
 
 
 DWORD GameGetScreenWidth();
@@ -14,15 +12,13 @@ int   GameDestroy();
 #define SAFE_DELETE_ARRAY(p) { if(p) { delete[] (p);   (p)=NULL; } }
 #define SAFE_RELEASE(p)      { if(p) { (p)->Release(); (p)=NULL; } }
 
-
-#pragma comment(lib, "legacy_stdio_definitions.lib")
 // link the 2d game library
 #if defined(_DEBUG)
-  #pragma comment(lib, "../../lib/LcsLib_.lib")
+  #pragma comment(lib, "LcsLib_.lib")
 #else
-  #pragma comment(lib, "../../lib/LcsLib.lib")
+  #pragma comment(lib, "LcsLib.lib")
 #endif
-
+#include "LcsLib.h"
 
 enum
 {

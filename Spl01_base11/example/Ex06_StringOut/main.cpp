@@ -1,17 +1,12 @@
-﻿#pragma comment(lib, "legacy_stdio_definitions.lib")
-
-
-// link the 2d game library
+﻿// link the 2d game library
 #if defined(_DEBUG)
-  #pragma comment(lib, "../../lib/LcsLib_.lib")
+  #pragma comment(lib, "LcsLib_.lib")
 #else
-  #pragma comment(lib, "../../lib/LcsLib.lib")
+  #pragma comment(lib, "LcsLib.lib")
 #endif
 
 // include the 2d game header file
-#include "../../include/LcsLib.h"
-
-
+#include "LcsLib.h"
 #include <stdio.h>
 
 

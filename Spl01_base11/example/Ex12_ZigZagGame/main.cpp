@@ -1,7 +1,4 @@
-﻿#pragma comment(lib, "legacy_stdio_definitions.lib")
-
-
-#include <LcsLib.h>
+﻿#include <LcsLib.h>
 #include <stdio.h>
 
 #include "GameHeader.h"

@@ -8,7 +8,7 @@
 #define STRICT
 #include <windows.h>
 #include <mmsystem.h>
-#include <DxErr.h>
+#include "DxErrShim.h"
 #include <dsound.h>
 
 #include "DSUtil.h"

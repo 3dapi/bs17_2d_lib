@@ -1,12 +1,8 @@
-﻿#pragma comment(lib, "legacy_stdio_definitions.lib")
-
-//
+﻿//
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-
-#include "_StdAfx.H"
-
+#include "_StdAfx.h"
 
 extern int g_nFont1;
 extern int g_Level;
