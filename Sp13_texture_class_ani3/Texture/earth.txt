@@ -1,0 +1,4 @@
+Texture: Texture/earth.bmp	0x00FFFFFF
+Total: 1
+TimeInterval: 0
+0		0	0	512	256

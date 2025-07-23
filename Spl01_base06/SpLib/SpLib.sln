@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.36227.6
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SpLib", "SpLib.vcxproj", "{2FC3C599-5061-4B2D-8853-AECEA1AC7795}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2FC3C599-5061-4B2D-8853-AECEA1AC7795}.Debug|x86.ActiveCfg = Debug|Win32
+		{2FC3C599-5061-4B2D-8853-AECEA1AC7795}.Debug|x86.Build.0 = Debug|Win32
+		{2FC3C599-5061-4B2D-8853-AECEA1AC7795}.Release|x86.ActiveCfg = Release|Win32
+		{2FC3C599-5061-4B2D-8853-AECEA1AC7795}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0B746636-9E4A-4643-AD4C-F258E4C8A981}
+	EndGlobalSection
+EndGlobal
