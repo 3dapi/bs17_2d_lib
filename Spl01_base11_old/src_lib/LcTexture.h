@@ -13,7 +13,7 @@ namespace LcsLib
 class CLcTexture : public ILcTexture
 {
 protected:
-	INT					m_nID;
+	int					m_nID;
 	char				m_sFile[128];
 	LPDIRECT3DTEXTURE9	m_pTex;
 	D3DXIMAGE_INFO		m_pImg;
@@ -22,18 +22,18 @@ public:
 	CLcTexture();
 	virtual	~CLcTexture();
 
-	virtual	INT		Create(void* p1=NULL,void* p2=NULL,void* p3=NULL,void* p4=NULL);
+	virtual	int		Create(void* p1=NULL,void* p2=NULL,void* p3=NULL,void* p4=NULL);
 	virtual	void	Destroy();
-	virtual	INT		GetID();
+	virtual	int		GetID();
 
-	virtual	INT		GetImageWidth();
-	virtual	INT		GetImageHeight();
+	virtual	int		GetImageWidth();
+	virtual	int		GetImageHeight();
 	virtual	void*	GetTexture();
 	virtual	void	GetImageRect(void* rc);
 
 	char*	GetName();
 
-	static	INT					m_nIDTex;		// Texture ID
+	static	int					m_nIDTex;		// Texture ID
 	static	LPDIRECT3DDEVICE9	m_pDevice;		// Direct3DDevice
 };
 

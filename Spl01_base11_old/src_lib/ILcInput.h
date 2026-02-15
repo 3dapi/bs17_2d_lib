@@ -32,29 +32,29 @@ interface ILcInput
 
 	virtual ~ILcInput(){};
 
-	virtual	INT		Create(void* p1=NULL,void* p2=NULL,void* p3=NULL,void* p4=NULL)=0;
-	virtual INT		FrameMove() = 0;
+	virtual	int		Create(void* p1=NULL,void* p2=NULL,void* p3=NULL,void* p4=NULL)=0;
+	virtual int		FrameMove() = 0;
 	virtual void	Destroy() = 0;
-	virtual LRESULT	MsgProc(HWND,UINT,WPARAM,LPARAM)=0;
+	virtual LRESULT	MsgProc(HWND,unsigned int,WPARAM,LPARAM)=0;
 
-	virtual BOOL	KeyDown	(INT nKey)=0;
-	virtual BOOL	KeyUp	(INT nKey)=0;
-	virtual BOOL	KeyPress(INT nKey)=0;
-	virtual INT		KeyState(INT nKey)=0;
+	virtual BOOL	KeyDown	(int nKey)=0;
+	virtual BOOL	KeyUp	(int nKey)=0;
+	virtual BOOL	KeyPress(int nKey)=0;
+	virtual int		KeyState(int nKey)=0;
 
-	virtual BOOL	BtnDown	 (INT nBtn)=0;
-	virtual BOOL	BtnUp	 (INT nBtn)=0;
-	virtual BOOL	BtnPress (INT nBtn)=0;
-	virtual INT		BtnState (INT nBtn)=0;
+	virtual BOOL	BtnDown	 (int nBtn)=0;
+	virtual BOOL	BtnUp	 (int nBtn)=0;
+	virtual BOOL	BtnPress (int nBtn)=0;
+	virtual int		BtnState (int nBtn)=0;
 
 	virtual const FLOAT* GetMousePos()=0;
 	virtual const FLOAT* GetMouseEps()=0;
 
-	virtual const BYTE* GetKeyMap()=0;
-	virtual const BYTE* GetBtnMap()=0;
+	virtual const unsigned char* GetKeyMap()=0;
+	virtual const unsigned char* GetBtnMap()=0;
 };
 
-INT LcDev_InputCreate(char* sCmd, ILcInput** pData, void* hWnd);
+int LcDev_InputCreate(char* sCmd, ILcInput** pData, void* hWnd);
 
 }//namespace LcsLib
 

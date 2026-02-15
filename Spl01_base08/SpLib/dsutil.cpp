@@ -274,7 +274,7 @@ LFail:
 //
 
 HRESULT CSoundManager::CreateFromMemory( CSound** ppSound,
-                                        BYTE* pbData,
+                                        unsigned char* pbData,
                                         ULONG  ulDataSize,
                                         LPWAVEFORMATEX pwfx,
                                         DWORD dwCreationFlags,
@@ -533,7 +533,7 @@ HRESULT CSound::FillBufferWithSound( LPDIRECTSOUNDBUFFER pDSB, BOOL bRepeatWavIf
     // Reset the wave file to the beginning
     m_pWaveFile->ResetFile();
 
-    if( FAILED( hr = m_pWaveFile->Read( (BYTE*) pDSLockedBuffer,
+    if( FAILED( hr = m_pWaveFile->Read( (unsigned char*) pDSLockedBuffer,
                                         dwDSLockedBufferSize,
                                         &dwWavDataRead ) ) )
         return DXTRACE_ERR( TEXT("Read"), hr );
@@ -541,9 +541,9 @@ HRESULT CSound::FillBufferWithSound( LPDIRECTSOUNDBUFFER pDSB, BOOL bRepeatWavIf
     if( dwWavDataRead == 0 )
     {
         // Wav is blank, so just fill with silence
-        FillMemory( (BYTE*) pDSLockedBuffer,
+        FillMemory( (unsigned char*) pDSLockedBuffer,
                     dwDSLockedBufferSize,
-                    (BYTE)(m_pWaveFile->m_pwfx->wBitsPerSample == 8 ? 128 : 0 ) );
+                    (unsigned char)(m_pWaveFile->m_pwfx->wBitsPerSample == 8 ? 128 : 0 ) );
     }
     else if( dwWavDataRead < dwDSLockedBufferSize )
     {
@@ -560,7 +560,7 @@ HRESULT CSound::FillBufferWithSound( LPDIRECTSOUNDBUFFER pDSB, BOOL bRepeatWavIf
                 if( FAILED( hr = m_pWaveFile->ResetFile() ) )
                     return DXTRACE_ERR( TEXT("ResetFile"), hr );
 
-                hr = m_pWaveFile->Read( (BYTE*)pDSLockedBuffer + dwReadSoFar,
+                hr = m_pWaveFile->Read( (unsigned char*)pDSLockedBuffer + dwReadSoFar,
                                         dwDSLockedBufferSize - dwReadSoFar,
                                         &dwWavDataRead );
                 if( FAILED(hr) )
@@ -572,9 +572,9 @@ HRESULT CSound::FillBufferWithSound( LPDIRECTSOUNDBUFFER pDSB, BOOL bRepeatWavIf
         else
         {
             // Don't repeat the wav file, just fill in silence
-            FillMemory( (BYTE*) pDSLockedBuffer + dwWavDataRead,
+            FillMemory( (unsigned char*) pDSLockedBuffer + dwWavDataRead,
                         dwDSLockedBufferSize - dwWavDataRead,
-                        (BYTE)(m_pWaveFile->m_pwfx->wBitsPerSample == 8 ? 128 : 0 ) );
+                        (unsigned char)(m_pWaveFile->m_pwfx->wBitsPerSample == 8 ? 128 : 0 ) );
         }
     }
 
@@ -921,7 +921,7 @@ HRESULT CStreamingSound::HandleWaveStreamNotification( BOOL bLoopedPlay )
     if( !m_bFillNextNotificationWithSilence )
     {
         // Fill the DirectSound buffer with wav data
-        if( FAILED( hr = m_pWaveFile->Read( (BYTE*) pDSLockedBuffer,
+        if( FAILED( hr = m_pWaveFile->Read( (unsigned char*) pDSLockedBuffer,
                                                   dwDSLockedBufferSize,
                                                   &dwBytesWrittenToBuffer ) ) )
             return DXTRACE_ERR( TEXT("Read"), hr );
@@ -930,7 +930,7 @@ HRESULT CStreamingSound::HandleWaveStreamNotification( BOOL bLoopedPlay )
     {
         // Fill the DirectSound buffer with silence
         FillMemory( pDSLockedBuffer, dwDSLockedBufferSize,
-                    (BYTE)( m_pWaveFile->m_pwfx->wBitsPerSample == 8 ? 128 : 0 ) );
+                    (unsigned char)( m_pWaveFile->m_pwfx->wBitsPerSample == 8 ? 128 : 0 ) );
         dwBytesWrittenToBuffer = dwDSLockedBufferSize;
     }
 
@@ -941,9 +941,9 @@ HRESULT CStreamingSound::HandleWaveStreamNotification( BOOL bLoopedPlay )
         if( !bLoopedPlay )
         {
             // Fill in silence for the rest of the buffer.
-            FillMemory( (BYTE*) pDSLockedBuffer + dwBytesWrittenToBuffer,
+            FillMemory( (unsigned char*) pDSLockedBuffer + dwBytesWrittenToBuffer,
                         dwDSLockedBufferSize - dwBytesWrittenToBuffer,
-                        (BYTE)(m_pWaveFile->m_pwfx->wBitsPerSample == 8 ? 128 : 0 ) );
+                        (unsigned char)(m_pWaveFile->m_pwfx->wBitsPerSample == 8 ? 128 : 0 ) );
 
             // Any future notifications should just fill the buffer with silence
             m_bFillNextNotificationWithSilence = TRUE;
@@ -958,7 +958,7 @@ HRESULT CStreamingSound::HandleWaveStreamNotification( BOOL bLoopedPlay )
                 if( FAILED( hr = m_pWaveFile->ResetFile() ) )
                     return DXTRACE_ERR( TEXT("ResetFile"), hr );
 
-                if( FAILED( hr = m_pWaveFile->Read( (BYTE*)pDSLockedBuffer + dwReadSoFar,
+                if( FAILED( hr = m_pWaveFile->Read( (unsigned char*)pDSLockedBuffer + dwReadSoFar,
                                                           dwDSLockedBufferSize - dwReadSoFar,
                                                           &dwBytesWrittenToBuffer ) ) )
                     return DXTRACE_ERR( TEXT("Read"), hr );
@@ -1157,7 +1157,7 @@ HRESULT CWaveFile::Open( LPTSTR strFileName, WAVEFORMATEX* pwfx, DWORD dwFlags )
 // CWaveFile::OpenFromMemory()
 // copy data to CWaveFile member variable from memory
 
-HRESULT CWaveFile::OpenFromMemory( BYTE* pbData, ULONG ulDataSize,
+HRESULT CWaveFile::OpenFromMemory( unsigned char* pbData, ULONG ulDataSize,
                                    WAVEFORMATEX* pwfx, DWORD dwFlags )
 {
     m_pwfx       = pwfx;
@@ -1236,7 +1236,7 @@ HRESULT CWaveFile::ReadMMIO()
         m_pwfx->cbSize = cbExtraBytes;
 
         // Now, read those extra bytes into the structure, if cbExtraAlloc != 0.
-        if( mmioRead( m_hmmio, (CHAR*)(((BYTE*)&(m_pwfx->cbSize))+sizeof(WORD)),
+        if( mmioRead( m_hmmio, (CHAR*)(((unsigned char*)&(m_pwfx->cbSize))+sizeof(WORD)),
                       cbExtraBytes ) != cbExtraBytes )
         {
             SAFE_DELETE( m_pwfx );
@@ -1316,7 +1316,7 @@ HRESULT CWaveFile::ResetFile()
 //       subsequent calls will be continue where the last left off unless
 //       Reset() is called.
 
-HRESULT CWaveFile::Read( BYTE* pBuffer, DWORD dwSizeToRead, DWORD* pdwSizeRead )
+HRESULT CWaveFile::Read( unsigned char* pBuffer, DWORD dwSizeToRead, DWORD* pdwSizeRead )
 {
     if( m_bIsReadingFromMemory )
     {
@@ -1325,8 +1325,8 @@ HRESULT CWaveFile::Read( BYTE* pBuffer, DWORD dwSizeToRead, DWORD* pdwSizeRead )
         if( pdwSizeRead != NULL )
             *pdwSizeRead = 0;
 
-        if( (BYTE*)(m_pbDataCur + dwSizeToRead) >
-            (BYTE*)(m_pbData + m_ulDataSize) )
+        if( (unsigned char*)(m_pbDataCur + dwSizeToRead) >
+            (unsigned char*)(m_pbData + m_ulDataSize) )
         {
             dwSizeToRead = m_ulDataSize - (DWORD)(m_pbDataCur - m_pbData);
         }
@@ -1353,7 +1353,7 @@ HRESULT CWaveFile::Read( BYTE* pBuffer, DWORD dwSizeToRead, DWORD* pdwSizeRead )
         if( 0 != mmioGetInfo( m_hmmio, &mmioinfoIn, 0 ) )
             return DXTRACE_ERR( TEXT("mmioGetInfo"), E_FAIL );
 
-        UINT cbDataIn = dwSizeToRead;
+        unsigned int cbDataIn = dwSizeToRead;
         if( cbDataIn > m_ck.cksize )
             cbDataIn = m_ck.cksize;
 
@@ -1372,7 +1372,7 @@ HRESULT CWaveFile::Read( BYTE* pBuffer, DWORD dwSizeToRead, DWORD* pdwSizeRead )
             }
 
             // Actual copy.
-            *((BYTE*)pBuffer+cT) = *((BYTE*)mmioinfoIn.pchNext);
+            *((unsigned char*)pBuffer+cT) = *((unsigned char*)mmioinfoIn.pchNext);
             mmioinfoIn.pchNext++;
         }
 
@@ -1419,7 +1419,7 @@ HRESULT CWaveFile::Close()
 
         mmioSeek( m_hmmio, 0, SEEK_SET );
 
-        if( 0 != (INT)mmioDescend( m_hmmio, &m_ckRiff, NULL, 0 ) )
+        if( 0 != (int)mmioDescend( m_hmmio, &m_ckRiff, NULL, 0 ) )
             return DXTRACE_ERR( TEXT("mmioDescend"), E_FAIL );
 
         m_ck.ckid = mmioFOURCC('f', 'a', 'c', 't');
@@ -1484,7 +1484,7 @@ HRESULT CWaveFile::WriteMMIO( WAVEFORMATEX *pwfxDest )
     else
     {
         // Write the variable length size.
-        if( (UINT)mmioWrite( m_hmmio, (HPSTR) pwfxDest,
+        if( (unsigned int)mmioWrite( m_hmmio, (HPSTR) pwfxDest,
                              sizeof(*pwfxDest) + pwfxDest->cbSize ) !=
                              ( sizeof(*pwfxDest) + pwfxDest->cbSize ) )
             return DXTRACE_ERR( TEXT("mmioWrite"), E_FAIL );
@@ -1517,9 +1517,9 @@ HRESULT CWaveFile::WriteMMIO( WAVEFORMATEX *pwfxDest )
 // CWaveFile::Write()
 // Writes data to the open wave file
 
-HRESULT CWaveFile::Write( UINT nSizeToWrite, BYTE* pbSrcData, UINT* pnSizeWrote )
+HRESULT CWaveFile::Write( unsigned int nSizeToWrite, unsigned char* pbSrcData, unsigned int* pnSizeWrote )
 {
-    UINT cT;
+    unsigned int cT;
 
     if( m_bIsReadingFromMemory )
         return E_NOTIMPL;
@@ -1539,8 +1539,8 @@ HRESULT CWaveFile::Write( UINT nSizeToWrite, BYTE* pbSrcData, UINT* pnSizeWrote 
                 return DXTRACE_ERR( TEXT("mmioAdvance"), E_FAIL );
         }
 
-        *((BYTE*)m_mmioinfoOut.pchNext) = *((BYTE*)pbSrcData+cT);
-        (BYTE*)m_mmioinfoOut.pchNext++;
+        *((unsigned char*)m_mmioinfoOut.pchNext) = *((unsigned char*)pbSrcData+cT);
+        (unsigned char*)m_mmioinfoOut.pchNext++;
 
         (*pnSizeWrote)++;
     }

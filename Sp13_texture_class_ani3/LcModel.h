@@ -32,7 +32,7 @@ public:
 
 protected:
 	char					m_sFile[128];
-	INT						m_AniTot	;	// Ani Total Number
+	int						m_AniTot	;	// Ani Total Number
 	DWORD					m_AniDelta	;	// 시간 간격;
 	ILcTexture*				m_AniTex	;	// 애니 텍스처
 	std::vector<TAniInfo >	m_AniLst	;	// Animation List
@@ -47,7 +47,7 @@ public:
 	CLcModel2D();
 	virtual ~CLcModel2D();
 
-	virtual INT		Create(void* p1=NULL, void* p2=NULL, void* p3=NULL, void* p4=NULL);
+	virtual int		Create(void* p1=NULL, void* p2=NULL, void* p3=NULL, void* p4=NULL);
 	virtual void	Destroy();
 	virtual void	Render();
 	virtual const char*	GetName();
@@ -56,8 +56,8 @@ public:
 	virtual	void	SetColor(const DWORD=0xFFFFFFFF);
 	virtual	void	SetRect(void* rc=NULL);
 	
- 	virtual	INT		FindAniIndex(INT* pOut/*Out*/, DWORD dTimeCur, DWORD dTimeBgn);
-	virtual	INT		FindImageRect(void* pOut/*Out*/, INT nIndex);
+ 	virtual	int		FindAniIndex(int* pOut/*Out*/, DWORD dTimeCur, DWORD dTimeBgn);
+	virtual	int		FindImageRect(void* pOut/*Out*/, int nIndex);
 
 
 	static LPD3DXSPRITE				m_pSprite;

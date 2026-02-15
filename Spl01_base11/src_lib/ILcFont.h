@@ -18,12 +18,12 @@ interface	ILcFont
 {
 	virtual	~ILcFont(){};
 
-	virtual	INT		GetID()=0;
+	virtual	int		GetID()=0;
 	virtual	void*	GetFont()=0;
 };
 
 
-INT LcDev_FontCreate(char* sCmd
+int LcDev_FontCreate(char* sCmd
 					, ILcFont** pData
 					, void* p1=NULL		// char*: fong Name
 					, void* p2=NULL		// LONG: Height
@@ -31,8 +31,8 @@ INT LcDev_FontCreate(char* sCmd
 					, void* p4=NULL
 					);
 
-INT			LcDev_FontInit(void* pd3dDevice);
-ILcFont*	LcDev_FontFind(INT _nID);
+int			LcDev_FontInit(void* pd3dDevice);
+ILcFont*	LcDev_FontFind(int _nID);
 void		LcDev_FontDestroy();
 
 }//namespace LcsLib

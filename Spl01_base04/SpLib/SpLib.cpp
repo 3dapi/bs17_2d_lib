@@ -30,7 +30,7 @@
 #include "SpLib.h"
 
 
-LRESULT CALLBACK WndProc(HWND hWnd,UINT uMsg,WPARAM wParam,LPARAM lParam);
+LRESULT CALLBACK WndProc(HWND hWnd,unsigned int uMsg,WPARAM wParam,LPARAM lParam);
 
 
 int		RenderEnv();
@@ -132,15 +132,6 @@ void SpLib_SetMouse( int (*_Mouse)(int x, int y, int z, int _event) )
 {
 	SpLib_Mouse = _Mouse;
 }
-
-
-
-
-
-
-
-
-
 
 int SpLib_CreateWin(int x, int y, int width, int height, char* sName)
 {
@@ -251,7 +242,7 @@ int SpLib_CreateWin(int x, int y, int width, int height, char* sName)
 	}
 
 
-	BYTE	sKey[256]={0};
+	unsigned char	sKey[256]={0};
 	::SetKeyboardState(sKey);
 
 	return 0;
@@ -614,7 +605,7 @@ void UpdateFrame()
 }
 
 
-LRESULT CALLBACK WndProc(HWND hWnd,UINT uMsg,WPARAM wParam,LPARAM lParam)
+LRESULT CALLBACK WndProc(HWND hWnd,unsigned int uMsg,WPARAM wParam,LPARAM lParam)
 {
 	WPARAM wHi = HIWORD(wParam);
 	WPARAM wLo = LOWORD(wParam);

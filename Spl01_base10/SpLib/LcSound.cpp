@@ -23,7 +23,7 @@
 
 namespace SpLib
 {
-INT				CLcSound::m_nIDSound= 0;		// Sound ID
+int				CLcSound::m_nIDSound= 0;		// Sound ID
 HWND			CLcSound::m_hWnd	= NULL;		// Window Handle
 CSoundManager*	CLcSound::m_pSndMn	= NULL;		//	Sound Manager
 
@@ -47,12 +47,12 @@ void CLcSound::Destroy()
 }
 
 
-INT CLcSound::GetID()
+int CLcSound::GetID()
 {
 	return m_nID;
 }
 
-INT CLcSound::Create(void* p1,void* p2,void* p3,void* p4)
+int CLcSound::Create(void* p1,void* p2,void* p3,void* p4)
 {
 	char*	sFile	= (char*)p1;
 	CSound*	pSnd	= NULL;
@@ -70,7 +70,7 @@ INT CLcSound::Create(void* p1,void* p2,void* p3,void* p4)
 	m_pSnd = pSnd;
 
 	// 새로운 아이디 부여
-	INT _nID = CLcSound::m_nIDSound;
+	int _nID = CLcSound::m_nIDSound;
 
 	++_nID;
 
@@ -91,30 +91,30 @@ INT CLcSound::Create(void* p1,void* p2,void* p3,void* p4)
 }
 
 
-INT CLcSound::Play()
+int CLcSound::Play()
 {
 	return m_pSnd->Play();
 }
 
-INT CLcSound::Stop()
+int CLcSound::Stop()
 {
 	return m_pSnd->Stop();
 }
 
 
-INT CLcSound::Reset()
+int CLcSound::Reset()
 {
 	return m_pSnd->Reset();
 }
 
 
-INT CLcSound::GetState()
+int CLcSound::GetState()
 {
 	return	m_pSnd->IsSoundPlaying();
 }
 
 
-INT LcDev_SoundCreate(char* sCmd
+int LcDev_SoundCreate(char* sCmd
 					, ILcSound** pData
 					, void* p1
 					, void* p2
@@ -144,7 +144,7 @@ typedef lsLcSound::iterator		itLcSound;
 lsLcSound	m_vSound;			// Sound List
 
 
-INT LcDev_SoundInit(void* hWnd)
+int LcDev_SoundInit(void* hWnd)
 {
 	CLcSound::m_hWnd = (HWND)hWnd;
 
@@ -167,9 +167,9 @@ INT LcDev_SoundInit(void* hWnd)
 
 void LcDev_SoundDestroy()
 {
-	INT iSize = SpLib::m_vSound.size();
+	int iSize = SpLib::m_vSound.size();
 	
-	for(INT i=0; i<iSize; ++i)
+	for(int i=0; i<iSize; ++i)
 	{
 		SAFE_DELETE( m_vSound[i]	);
 	}
@@ -181,12 +181,12 @@ void LcDev_SoundDestroy()
 }
 
 
-ILcSound* LcDev_SoundFind(INT _nID)
+ILcSound* LcDev_SoundFind(int _nID)
 {
-	INT iSize = m_vSound.size();
-	INT	nIdx=-1;
+	int iSize = m_vSound.size();
+	int	nIdx=-1;
 	
-	for(INT i=0; i<iSize; ++i)
+	for(int i=0; i<iSize; ++i)
 	{
 		if(m_vSound[i]->GetID() == _nID)
 		{
@@ -215,7 +215,7 @@ ILcSound* LcDev_SoundFind(INT _nID)
 
 
 
-INT SpLib_SoundLoad(char* sFileName)
+int SpLib_SoundLoad(char* sFileName)
 {
 	SpLib::ILcSound*	p = NULL;
 	
@@ -229,12 +229,12 @@ INT SpLib_SoundLoad(char* sFileName)
 }
 
 
-INT SpLib_SoundRelease(INT _nID)
+int SpLib_SoundRelease(int _nID)
 {
-	INT iSize = SpLib::m_vSound.size();
-	INT	nIdx=-1;
+	int iSize = SpLib::m_vSound.size();
+	int	nIdx=-1;
 
-	for(INT i=0; i<iSize; ++i)
+	for(int i=0; i<iSize; ++i)
 	{
 		if(SpLib::m_vSound[i]->GetID() == _nID)
 		{
@@ -260,12 +260,12 @@ INT SpLib_SoundRelease(INT _nID)
 
 
 
-void	SpLib_SoundPlay(INT _nID)
+void	SpLib_SoundPlay(int _nID)
 {
-	INT iSize = SpLib::m_vSound.size();
-	INT	nIdx=-1;
+	int iSize = SpLib::m_vSound.size();
+	int	nIdx=-1;
 
-	for(INT i=0; i<iSize; ++i)
+	for(int i=0; i<iSize; ++i)
 	{
 		if(SpLib::m_vSound[i]->GetID() == _nID)
 		{
@@ -280,12 +280,12 @@ void	SpLib_SoundPlay(INT _nID)
 	SpLib::m_vSound[nIdx]->Play();
 }
 
-void	SpLib_SoundStop(INT _nID)
+void	SpLib_SoundStop(int _nID)
 {
-	INT iSize = SpLib::m_vSound.size();
-	INT	nIdx=-1;
+	int iSize = SpLib::m_vSound.size();
+	int	nIdx=-1;
 
-	for(INT i=0; i<iSize; ++i)
+	for(int i=0; i<iSize; ++i)
 	{
 		if(SpLib::m_vSound[i]->GetID() == _nID)
 		{
@@ -300,12 +300,12 @@ void	SpLib_SoundStop(INT _nID)
 	SpLib::m_vSound[nIdx]->Stop();
 }
 
-void	SpLib_SoundReset(INT _nID)
+void	SpLib_SoundReset(int _nID)
 {
-	INT iSize = SpLib::m_vSound.size();
-	INT	nIdx=-1;
+	int iSize = SpLib::m_vSound.size();
+	int	nIdx=-1;
 
-	for(INT i=0; i<iSize; ++i)
+	for(int i=0; i<iSize; ++i)
 	{
 		if(SpLib::m_vSound[i]->GetID() == _nID)
 		{
@@ -320,12 +320,12 @@ void	SpLib_SoundReset(INT _nID)
 	SpLib::m_vSound[nIdx]->Reset();
 }
 
-BOOL	SpLib_SoundIsPlaying(INT _nID)
+BOOL	SpLib_SoundIsPlaying(int _nID)
 {
-	INT iSize = SpLib::m_vSound.size();
-	INT	nIdx=-1;
+	int iSize = SpLib::m_vSound.size();
+	int	nIdx=-1;
 
-	for(INT i=0; i<iSize; ++i)
+	for(int i=0; i<iSize; ++i)
 	{
 		if(SpLib::m_vSound[i]->GetID() == _nID)
 		{

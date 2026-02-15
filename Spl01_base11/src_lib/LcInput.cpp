@@ -21,13 +21,13 @@ class CLcInput : public ILcInput
 public:
 	HWND		m_hWnd;
 
-	BYTE		m_KeyCur[ILcInput::MAX_INPUT_KEY];	// 키보드 현재 상태
-	BYTE		m_KeyOld[ILcInput::MAX_INPUT_KEY];	// 키보드 이전 상태
-	BYTE		m_KeyMap[ILcInput::MAX_INPUT_KEY];	// 키보드 맵
+	unsigned char		m_KeyCur[ILcInput::MAX_INPUT_KEY];	// 키보드 현재 상태
+	unsigned char		m_KeyOld[ILcInput::MAX_INPUT_KEY];	// 키보드 이전 상태
+	unsigned char		m_KeyMap[ILcInput::MAX_INPUT_KEY];	// 키보드 맵
 
-	BYTE		m_BtnCur[ILcInput::MAX_INPUT_BTN];	// 마우스 현재 상태
-	BYTE		m_BtnOld[ILcInput::MAX_INPUT_BTN];	// 마우스 이전 상태
-	BYTE		m_BtnMap[ILcInput::MAX_INPUT_BTN];	// 마우스 맵
+	unsigned char		m_BtnCur[ILcInput::MAX_INPUT_BTN];	// 마우스 현재 상태
+	unsigned char		m_BtnOld[ILcInput::MAX_INPUT_BTN];	// 마우스 이전 상태
+	unsigned char		m_BtnMap[ILcInput::MAX_INPUT_BTN];	// 마우스 맵
 
 	D3DXVECTOR3	m_vcCur;					// 휠 마우스 Z
 	D3DXVECTOR3 m_vcOld;
@@ -35,34 +35,34 @@ public:
 
 	DWORD		m_dTimeDC;					// Double Click Time Interval
 	DWORD		m_dBtnBgn[ILcInput::MAX_INPUT_BTN];	// Double Click Start
-	INT			m_dBtnCnt[ILcInput::MAX_INPUT_BTN];	// Double Click Count
+	int			m_dBtnCnt[ILcInput::MAX_INPUT_BTN];	// Double Click Count
 
 
 public:
 	CLcInput();
 	virtual ~CLcInput();
 
-	virtual	INT		Create(void* p1=NULL,void* p2=NULL,void* p3=NULL,void* p4=NULL);
-	virtual INT		FrameMove();
+	virtual	int		Create(void* p1=NULL,void* p2=NULL,void* p3=NULL,void* p4=NULL);
+	virtual int		FrameMove();
 	virtual void	Destroy();
-	virtual LRESULT	MsgProc(HWND,UINT,WPARAM,LPARAM);
+	virtual LRESULT	MsgProc(HWND,unsigned int,WPARAM,LPARAM);
 
 public:
-	virtual BOOL	KeyDown	(INT nKey);
-	virtual BOOL	KeyUp	(INT nKey);
-	virtual BOOL	KeyPress(INT nKey);
-	virtual INT		KeyState(INT nKey);
+	virtual BOOL	KeyDown	(int nKey);
+	virtual BOOL	KeyUp	(int nKey);
+	virtual BOOL	KeyPress(int nKey);
+	virtual int		KeyState(int nKey);
 
-	virtual BOOL	BtnDown	 (INT nBtn);
-	virtual BOOL	BtnUp	 (INT nBtn);
-	virtual BOOL	BtnPress (INT nBtn);
-	virtual INT		BtnState (INT nBtn);
+	virtual BOOL	BtnDown	 (int nBtn);
+	virtual BOOL	BtnUp	 (int nBtn);
+	virtual BOOL	BtnPress (int nBtn);
+	virtual int		BtnState (int nBtn);
 
 	virtual const FLOAT* GetMousePos();
 	virtual const FLOAT* GetMouseEps();
 
-	virtual const BYTE* GetKeyMap();
-	virtual const BYTE* GetBtnMap();
+	virtual const unsigned char* GetKeyMap();
+	virtual const unsigned char* GetBtnMap();
 };
 
 
@@ -89,7 +89,7 @@ CLcInput::CLcInput()
 	memset(m_dBtnBgn, 0, sizeof(m_dBtnBgn));
 	memset(m_dBtnCnt, 0, sizeof(m_dBtnCnt));
 
-	BYTE	sKey[256]={0};
+	unsigned char	sKey[256]={0};
 	::SetKeyboardState(sKey);
 }
 
@@ -105,7 +105,7 @@ void CLcInput::Destroy()
 
 
 
-INT CLcInput::Create(void* p1,void* p2,void* p3,void* p4)
+int CLcInput::Create(void* p1,void* p2,void* p3,void* p4)
 {
 	m_hWnd		= (HWND)p1;
 
@@ -129,24 +129,24 @@ INT CLcInput::Create(void* p1,void* p2,void* p3,void* p4)
 
 	m_dBtnBgn[0]	= GetTickCount();
 
-	for(INT i=1; i<ILcInput::MAX_INPUT_BTN; ++i)
+	for(int i=1; i<ILcInput::MAX_INPUT_BTN; ++i)
 	{
 		m_dBtnBgn[i]	= m_dBtnBgn[0];
 	}
 
 	memset(m_dBtnCnt, 0, sizeof(m_dBtnCnt));
 
-	//UINT ucNumLines=3;  // 3 is the default
-	UINT ucNumLines=0;  // 3 is the default
+	//unsigned int ucNumLines=3;  // 3 is the default
+	unsigned int ucNumLines=0;  // 3 is the default
 	SystemParametersInfo(SPI_GETWHEELSCROLLLINES, 0, &ucNumLines, 0);
 
 	return 0;
 }
 
 
-INT CLcInput::FrameMove()	// Mouse
+int CLcInput::FrameMove()	// Mouse
 {
-	INT i	= 0;
+	int i	= 0;
 
 	// 1. current 값을 old에 복사, 이전 상태를 저장한다.
 	memcpy(m_KeyOld, m_KeyCur, sizeof(m_KeyOld));
@@ -168,11 +168,11 @@ INT CLcInput::FrameMove()	// Mouse
 	// Keyboard
 	for(i=0; i<ILcInput::MAX_INPUT_KEY; ++i)
 	{
-		BYTE	vKey = m_KeyCur[i] & 0x80;		// 현재의 키보드 상태를 읽어온다.
+		unsigned char	vKey = m_KeyCur[i] & 0x80;		// 현재의 키보드 상태를 읽어온다.
 		m_KeyCur[i] = (vKey)? 1: 0;				// 키보드 상태를 0과 1로 정한다.
 
-		INT nOld = m_KeyOld[i];
-		INT nCur = m_KeyCur[i];
+		int nOld = m_KeyOld[i];
+		int nCur = m_KeyCur[i];
 
 		if		(0 == nOld && 1 ==nCur) m_KeyMap[i] = ILcInput::EINPUT_DOWN;	// Down
 		else if (1 == nOld && 0 ==nCur) m_KeyMap[i] = ILcInput::EINPUT_UP;		// UP
@@ -189,8 +189,8 @@ INT CLcInput::FrameMove()	// Mouse
 
 	for(i=0; i<ILcInput::MAX_INPUT_BTN; ++i)
 	{
-		INT nOld = m_BtnOld[i];
-		INT nCur = m_BtnCur[i];
+		int nOld = m_BtnOld[i];
+		int nCur = m_BtnCur[i];
 
 		if		(0 == nOld && 1 ==nCur) m_BtnMap[i] = ILcInput::EINPUT_DOWN;	// Down
 		else if (1 == nOld && 0 ==nCur) m_BtnMap[i] = ILcInput::EINPUT_UP;		// UP
@@ -269,44 +269,44 @@ INT CLcInput::FrameMove()	// Mouse
 }
 
 
-BOOL CLcInput::KeyDown(INT nKey)
+BOOL CLcInput::KeyDown(int nKey)
 {
 	return m_KeyMap[nKey] == ILcInput::EINPUT_DOWN;
 }
 
-BOOL CLcInput::KeyUp(INT nKey)
+BOOL CLcInput::KeyUp(int nKey)
 {
 	return m_KeyMap[nKey] == ILcInput::EINPUT_UP;
 }
 
-BOOL CLcInput::KeyPress(INT nKey)
+BOOL CLcInput::KeyPress(int nKey)
 {
 	return m_KeyMap[nKey] == ILcInput::EINPUT_PRESS;
 }
 
-INT CLcInput::KeyState(INT nKey)
+int CLcInput::KeyState(int nKey)
 {
 	return m_KeyMap[nKey];
 }
 
 // Mouse
 
-BOOL CLcInput::BtnDown(INT nBtn)
+BOOL CLcInput::BtnDown(int nBtn)
 {
 	return m_BtnMap[nBtn] == ILcInput::EINPUT_DOWN;
 }
 
-BOOL CLcInput::BtnUp(INT nBtn)
+BOOL CLcInput::BtnUp(int nBtn)
 {
 	return m_BtnMap[nBtn] == ILcInput::EINPUT_UP;
 }
 
-BOOL CLcInput::BtnPress(INT nBtn)
+BOOL CLcInput::BtnPress(int nBtn)
 {
 	return m_BtnMap[nBtn] == ILcInput::EINPUT_PRESS;
 }
 
-INT CLcInput::BtnState(INT nBtn)
+int CLcInput::BtnState(int nBtn)
 {
 	return m_BtnMap[nBtn];
 }
@@ -323,13 +323,13 @@ const FLOAT* CLcInput::GetMouseEps()
 }
 
 
-const BYTE* CLcInput::GetKeyMap()
+const unsigned char* CLcInput::GetKeyMap()
 {
 	return &m_KeyMap[0];
 }
 
 
-const BYTE* CLcInput::GetBtnMap()
+const unsigned char* CLcInput::GetBtnMap()
 {
 	return &m_BtnMap[0];
 }
@@ -337,14 +337,14 @@ const BYTE* CLcInput::GetBtnMap()
 
 
 
-LRESULT CLcInput::MsgProc(HWND hWnd,UINT msg,WPARAM wParam,LPARAM lParam)
+LRESULT CLcInput::MsgProc(HWND hWnd,unsigned int msg,WPARAM wParam,LPARAM lParam)
 {
 	switch( msg )
 	{
 		case WM_MOUSEWHEEL:
 		{
-			INT c= HIWORD(wParam);
-			INT d= LOWORD(wParam);
+			int c= HIWORD(wParam);
+			int d= LOWORD(wParam);
 
 			c = short( c );
 			m_vcCur.z += FLOAT(c)/120.f;
@@ -359,7 +359,7 @@ LRESULT CLcInput::MsgProc(HWND hWnd,UINT msg,WPARAM wParam,LPARAM lParam)
 
 
 
-INT LcDev_InputCreate(char* sCmd, ILcInput** pData, void* hWnd)
+int LcDev_InputCreate(char* sCmd, ILcInput** pData, void* hWnd)
 {
 	*pData = NULL;
 

@@ -34,7 +34,7 @@ int FrameMove()
 	int mouseY = LcsLib_GetMouseY();
 	int mouseZ = LcsLib_GetMouseZ();
 
-	BYTE* pKey = (BYTE*)LcsLib_GetKeyboard();
+	unsigned char* pKey = (unsigned char*)LcsLib_GetKeyboard();
 
 
 

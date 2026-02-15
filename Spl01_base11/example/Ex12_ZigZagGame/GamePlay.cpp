@@ -21,8 +21,8 @@ int		mouseX;
 int		mouseY;
 int		mouseZ;
 
-BYTE	m_pKeyOld[256];		// Old Key
-BYTE	m_pKeyCur[256];		// Current Key
+unsigned char	m_pKeyOld[256];		// Old Key
+unsigned char	m_pKeyCur[256];		// Current Key
 
 int		nSound[2];
 

@@ -19,12 +19,12 @@ using namespace std;
 
 namespace SpLib
 {
-INT				CLcModel2D::m_nIDModel	= 0;		// Sound ID
+int				CLcModel2D::m_nIDModel	= 0;		// Sound ID
 LPD3DXSPRITE	CLcModel2D::m_pSprite = NULL;
 CLcModel2D::lsModel* CLcModel2D::m_vModel	= NULL;
 
 
-INT LcDev_ModelInit(void* pSprite)
+int LcDev_ModelInit(void* pSprite)
 {
 	CLcModel2D::m_pSprite	= (LPD3DXSPRITE)pSprite;
 	CLcModel2D::m_vModel	= new CLcModel2D::lsModel;
@@ -80,7 +80,7 @@ void CLcModel2D::Destroy()
 }
 
 
-INT CLcModel2D::GetID()
+int CLcModel2D::GetID()
 {
 	return m_nID;
 }
@@ -110,8 +110,8 @@ void CLcModel2D::SetRect(void* rc)
 {
 	if(NULL == rc)
 	{
-		INT nW = m_AniTex->GetImageWidth();
-		INT nH = m_AniTex->GetImageHeight();
+		int nW = m_AniTex->GetImageWidth();
+		int nH = m_AniTex->GetImageHeight();
 		::SetRect(&m_ImgRc, 0,0, nW, nH);
 	}
 	else
@@ -120,7 +120,7 @@ void CLcModel2D::SetRect(void* rc)
 
 
 
-INT	CLcModel2D::FindAniIndex(INT* pOut/*Out*/, DWORD dTimeCur, DWORD dTimeBgn)
+int	CLcModel2D::FindAniIndex(int* pOut/*Out*/, DWORD dTimeCur, DWORD dTimeBgn)
 {
 	BOOL	nFind = -1;
 	
@@ -129,7 +129,7 @@ INT	CLcModel2D::FindAniIndex(INT* pOut/*Out*/, DWORD dTimeCur, DWORD dTimeBgn)
 	
 	dDelta = dTimeCur- dTimeBgn;
 	
-	for(INT i=0; i<m_AniTot; ++i)
+	for(int i=0; i<m_AniTot; ++i)
 	{
 		if( m_AniLst[i].dTime<=dDelta && dDelta < (m_AniLst[i].dTime+ m_AniDelta))
 		{
@@ -147,7 +147,7 @@ INT	CLcModel2D::FindAniIndex(INT* pOut/*Out*/, DWORD dTimeCur, DWORD dTimeBgn)
 }
 
 
-INT CLcModel2D::FindImageRect(void* pOut/*Out*/, INT nIndex)
+int CLcModel2D::FindImageRect(void* pOut/*Out*/, int nIndex)
 {
 	if( nIndex<0 || nIndex>=m_AniTot)
 		return -1;
@@ -159,7 +159,7 @@ INT CLcModel2D::FindImageRect(void* pOut/*Out*/, INT nIndex)
 
 
 
-INT CLcModel2D::Create(void* p1, void* p2, void* p3, void* p4)
+int CLcModel2D::Create(void* p1, void* p2, void* p3, void* p4)
 {
 	::strcpy(m_sFile, (char*)p1);
 
@@ -183,7 +183,7 @@ INT CLcModel2D::Create(void* p1, void* p2, void* p3, void* p4)
 	::fgets(sLine, 512, fp);
 	::sscanf(sLine, "%*s %ld", &m_AniDelta);
 
-	INT nCnt = 0;
+	int nCnt = 0;
 
 	while(!feof(fp))
 	{
@@ -215,7 +215,7 @@ INT CLcModel2D::Create(void* p1, void* p2, void* p3, void* p4)
 
 	
 
-	INT _nID = CLcModel2D::m_nIDModel;
+	int _nID = CLcModel2D::m_nIDModel;
 	++_nID;
 	
 	// overflow....
@@ -244,7 +244,7 @@ void CLcModel2D::Render()
 
 
 
-INT LcDev_ModelCreate(char* sCmd, ILcModel** pData, void* p1, void* p2, void* p3, void* p4)
+int LcDev_ModelCreate(char* sCmd, ILcModel** pData, void* p1, void* p2, void* p3, void* p4)
 {
 	char* sModelName = (char*)p1;
 
@@ -291,7 +291,7 @@ ILcModel* LcDev_ModelFind(char* sFile)
 }
 
 
-ILcModel* LcDev_ModelFind(INT _nID)
+ILcModel* LcDev_ModelFind(int _nID)
 {
 	CLcModel2D::itModel	_F = CLcModel2D::m_vModel->begin();
 	CLcModel2D::itModel	_L = CLcModel2D::m_vModel->end();

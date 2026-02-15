@@ -28,7 +28,7 @@ void	SpLib_SetKeyboard( int (*_Keyboard)(unsigned char* key) );				// 게임엔�
 void	SpLib_SetMouse( int (*_Mouse)(int x, int y, int z, int _event) );		// 게임엔진에 마우스 이벤트를 가져오는 함수를 연결해주는 함수
 
 
-BYTE*	SpLib_GetKeyboard();
+unsigned char*	SpLib_GetKeyboard();
 int		SpLib_GetMouseX();
 int		SpLib_GetMouseY();
 int		SpLib_GetMouseZ();

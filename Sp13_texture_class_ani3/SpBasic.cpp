@@ -48,24 +48,24 @@ IGameObject*		m_pGameObject3;
 
 
 //Window+Device관련 함수들
-INT		Create(HINSTANCE hInst);
-INT		Run();
+int		Create(HINSTANCE hInst);
+int		Run();
 void	Cleanup();
 
 //게임 실행 관련 함수들
-INT		Init();
+int		Init();
 void	Destroy();
-INT		FrameMove();
-INT		Render();
+int		FrameMove();
+int		Render();
 
-LRESULT MsgProc			( HWND, UINT, WPARAM, LPARAM);
-LRESULT WINAPI WndProc	( HWND, UINT, WPARAM, LPARAM);
-
-
+LRESULT MsgProc			( HWND, unsigned int, WPARAM, LPARAM);
+LRESULT WINAPI WndProc	( HWND, unsigned int, WPARAM, LPARAM);
 
 
 
-INT Create( HINSTANCE hInst)
+
+
+int Create( HINSTANCE hInst)
 {
 	m_hInst	= hInst;
 	strcpy(m_sCls, "D3D Tutorial");
@@ -91,8 +91,8 @@ INT Create( HINSTANCE hInst)
 	SetRect( &rc, 0, 0, m_dScnX, m_dScnY);
 	AdjustWindowRect( &rc, m_dWinStyle, FALSE );
 
-	INT iScnSysW = ::GetSystemMetrics(SM_CXSCREEN);
-	INT iScnSysH = ::GetSystemMetrics(SM_CYSCREEN);
+	int iScnSysW = ::GetSystemMetrics(SM_CXSCREEN);
+	int iScnSysH = ::GetSystemMetrics(SM_CYSCREEN);
 
 	m_hWnd = CreateWindow( m_sCls
 		, m_sCls
@@ -179,7 +179,7 @@ void Cleanup()
 }
 
 
-LRESULT MsgProc( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam )
+LRESULT MsgProc( HWND hWnd, unsigned int msg, WPARAM wParam, LPARAM lParam )
 {
 	switch( msg )
 	{
@@ -212,7 +212,7 @@ LRESULT MsgProc( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam )
 
 
 
-INT Run()
+int Run()
 {
 	// Enter the message loop
 	MSG msg;
@@ -246,7 +246,7 @@ INT Run()
 
 
 
-INT Init()
+int Init()
 {
 	LcDev_TextureInit(m_pd3dDevice);
 	LcDev_ModelInit(m_pd3dSprite);
@@ -305,7 +305,7 @@ void Destroy()
 
 D3DXVECTOR3 m_vcPosImg2;
 
-INT FrameMove()
+int FrameMove()
 {
 
 	static DWORD	dTimeBgn = timeGetTime();
@@ -341,7 +341,7 @@ INT FrameMove()
 }
 
 
-INT Render()
+int Render()
 {
 	if( NULL == m_pd3dDevice )
 		return -1;
@@ -381,14 +381,14 @@ INT Render()
 
 
 
-LRESULT WINAPI WndProc( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam )
+LRESULT WINAPI WndProc( HWND hWnd, unsigned int msg, WPARAM wParam, LPARAM lParam )
 {
 	return MsgProc(hWnd, msg, wParam, lParam);
 }
 
 
 
-INT WINAPI WinMain( HINSTANCE hInst, HINSTANCE, LPSTR, INT )
+int WINAPI WinMain( HINSTANCE hInst, HINSTANCE, LPSTR, int )
 {
 	if(FAILED(Create(hInst)))
 		return -1;

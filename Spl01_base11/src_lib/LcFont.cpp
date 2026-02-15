@@ -23,7 +23,7 @@ namespace LcsLib
 class CLcFont : public ILcFont
 {
 protected:
-	INT					m_nID;
+	int					m_nID;
 	D3DXFONT_DESC		m_Dsc;
 	ID3DXFont*			m_pFnt;
 
@@ -31,20 +31,20 @@ public:
 	CLcFont();
 	virtual	~CLcFont();
 
-	virtual	INT		Create(void* p1=NULL,void* p2=NULL,void* p3=NULL,void* p4=NULL);
+	virtual	int		Create(void* p1=NULL,void* p2=NULL,void* p3=NULL,void* p4=NULL);
 	virtual	void	Destroy();
-	virtual	INT		GetID();
+	virtual	int		GetID();
 
 	virtual	void*	GetFont();
 
-	static INT					m_nIDFnt;		// Font ID
+	static int					m_nIDFnt;		// Font ID
 	static LPDIRECT3DDEVICE9	m_pDevice;		// Window Handle
 };
 
 
 
 
-INT					CLcFont::m_nIDFnt	= 0;		// Font ID
+int					CLcFont::m_nIDFnt	= 0;		// Font ID
 LPDIRECT3DDEVICE9	CLcFont::m_pDevice	= NULL;		// Direct3D Device
 
 
@@ -67,7 +67,7 @@ void CLcFont::Destroy()
 }
 
 
-INT CLcFont::GetID()
+int CLcFont::GetID()
 {
 	return m_nID;
 }
@@ -78,7 +78,7 @@ void* CLcFont::GetFont()
 }
 
 
-INT CLcFont::Create(void* p1,void* p2,void* p3,void* p4)
+int CLcFont::Create(void* p1,void* p2,void* p3,void* p4)
 {
 	ID3DXFont*	pDXFont	= NULL;
 	char*		sName	= (char*)p1;
@@ -108,7 +108,7 @@ INT CLcFont::Create(void* p1,void* p2,void* p3,void* p4)
 	m_pFnt = pDXFont;
 
 	// 새로운 아이디 부여
-	INT _nID = CLcFont::m_nIDFnt;
+	int _nID = CLcFont::m_nIDFnt;
 
 	++_nID;
 
@@ -128,7 +128,7 @@ INT CLcFont::Create(void* p1,void* p2,void* p3,void* p4)
 }
 
 
-INT LcDev_FontCreate(char* sCmd
+int LcDev_FontCreate(char* sCmd
 					, ILcFont** pData
 					, void* p1
 					, void* p2
@@ -158,7 +158,7 @@ typedef lsLcFont::iterator		itLcFont;
 lsLcFont	m_vFont;			// Font List
 
 
-INT LcDev_FontInit(void* pDev)
+int LcDev_FontInit(void* pDev)
 {
 	CLcFont::m_pDevice	= (LPDIRECT3DDEVICE9)pDev;
 
@@ -167,9 +167,9 @@ INT LcDev_FontInit(void* pDev)
 
 void LcDev_FontDestroy()
 {
-	INT iSize = LcsLib::m_vFont.size();
+	int iSize = LcsLib::m_vFont.size();
 
-	for(INT i=0; i<iSize; ++i)
+	for(int i=0; i<iSize; ++i)
 	{
 		SAFE_DELETE( m_vFont[i]	);
 	}
@@ -178,12 +178,12 @@ void LcDev_FontDestroy()
 }
 
 
-ILcFont* LcDev_FontFind(INT _nID)
+ILcFont* LcDev_FontFind(int _nID)
 {
-	INT iSize = m_vFont.size();
-	INT	nIdx=-1;
+	int iSize = m_vFont.size();
+	int	nIdx=-1;
 
-	for(INT i=0; i<iSize; ++i)
+	for(int i=0; i<iSize; ++i)
 	{
 		if(m_vFont[i]->GetID() == _nID)
 		{
@@ -213,7 +213,7 @@ ILcFont* LcDev_FontFind(INT _nID)
 
 
 
-INT LcsLib_FontCreate(char* sName, LONG iH, LONG iItalic)
+int LcsLib_FontCreate(char* sName, LONG iH, LONG iItalic)
 {
 	LcsLib::ILcFont* pFont=NULL;
 
@@ -226,7 +226,7 @@ INT LcsLib_FontCreate(char* sName, LONG iH, LONG iItalic)
 }
 
 
-INT LcsLib_FontDrawText(INT nIdx
+int LcsLib_FontDrawText(int nIdx
 					   , LONG lLeft
 					   , LONG lTop
 					   , LONG lRight
@@ -274,12 +274,12 @@ INT LcsLib_FontDrawText(INT nIdx
 }
 
 
-INT LcsLib_FontRelease(INT _nID)
+int LcsLib_FontRelease(int _nID)
 {
-	INT iSize = LcsLib::m_vFont.size();
-	INT	nIdx=-1;
+	int iSize = LcsLib::m_vFont.size();
+	int	nIdx=-1;
 
-	for(INT i=0; i<iSize; ++i)
+	for(int i=0; i<iSize; ++i)
 	{
 		if(LcsLib::m_vFont[i]->GetID() == _nID)
 		{

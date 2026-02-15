@@ -49,52 +49,52 @@ public:
 	ID3DXEffect*					m_pEft;			// ID3DXEffect
 	VtxRHWUV1						m_pVtx[4];		// Vertex Buffer
 
-	INT				m_nScnW;
-	INT				m_nScnH;
+	int				m_nScnW;
+	int				m_nScnH;
 
-	INT				m_Alphblend;
+	int				m_Alphblend;
 
 public:
 	CLcSpriteX();
 	virtual ~CLcSpriteX();
 
-	virtual INT		Create(void* =0, void* =0, void* =0, void* =0);
+	virtual int		Create(void* =0, void* =0, void* =0, void* =0);
 	virtual void	Destroy();
 
-	virtual	INT		Begin(DWORD=0);
-	virtual	INT		End(DWORD=0);
+	virtual	int		Begin(DWORD=0);
+	virtual	int		End(DWORD=0);
 
-	virtual	INT		OnResetDevice();
-	virtual	INT		OnLostDevice();
+	virtual	int		OnResetDevice();
+	virtual	int		OnLostDevice();
 
-	virtual	INT		Draw( void* pTex				// Texture
+	virtual	int		Draw( void* pTex				// Texture
 						, RECT* pRct				// Draw Region
 						, void* pScl=NULL			// Scaling
 						, void* pTrn=NULL			// Position
 						, DWORD dColor=0xFFFFFFFF	// color
-						, INT   bMono=0				// Monotone
+						, int   bMono=0				// Monotone
 						);
 
-	virtual	INT		DrawEx( void* pTex				// Texture
+	virtual	int		DrawEx( void* pTex				// Texture
 						, RECT* pRct				// Draw Region
 						, void* pScl				// Scaling
 						, void* pTrn				// Position
 						, void* pRot				// Rotation Center
 						, FLOAT	fAngle				// Rotation Angle(Radian)
 						, DWORD dColor=0xFFFFFFFF	// color
-						, INT   bMono=0				// Monotone
+						, int   bMono=0				// Monotone
 						);
 
-	virtual	void	AlphaOption(INT opt=0);
+	virtual	void	AlphaOption(int opt=0);
 protected:
-	INT		DrawExt(	void* pTex
+	int		DrawExt(	void* pTex
 						, RECT* pRct
 						, VEC2* pScl
 						, VEC2* pRot
 						, FLOAT fRot
 						, VEC2* pTrn
 						, DWORD dColor
-						, INT bMono);
+						, int bMono);
 };
 
 
@@ -132,7 +132,7 @@ void CLcSpriteX::Destroy()
 }
 
 
-INT CLcSpriteX::Create(void* p1, void* p2, void* p3, void* p4)
+int CLcSpriteX::Create(void* p1, void* p2, void* p3, void* p4)
 {
 	HRESULT	hr=0;
 
@@ -210,10 +210,10 @@ INT CLcSpriteX::Create(void* p1, void* p2, void* p3, void* p4)
 
 
 
-INT CLcSpriteX::Begin(DWORD dVal){	return 0;	}
-INT CLcSpriteX::End(DWORD dVal)	{	return 0;	}
+int CLcSpriteX::Begin(DWORD dVal){	return 0;	}
+int CLcSpriteX::End(DWORD dVal)	{	return 0;	}
 
-INT CLcSpriteX::OnResetDevice()
+int CLcSpriteX::OnResetDevice()
 {
 	LPDIRECT3DSURFACE9	pSfc;
 	D3DSURFACE_DESC		desc;
@@ -229,30 +229,30 @@ INT CLcSpriteX::OnResetDevice()
 	return m_pEft->OnResetDevice();
 }
 
-INT CLcSpriteX::OnLostDevice()
+int CLcSpriteX::OnLostDevice()
 {
 	return m_pEft->OnLostDevice();
 }
 
-INT CLcSpriteX::Draw(void* pTex				// Texture
+int CLcSpriteX::Draw(void* pTex				// Texture
 					, RECT* pRct			// Draw Region
 					, void* pScl			// Scaling
 					, void* pTrn			// Position
 					, DWORD dColor			// color
-					, INT   bMono			// Monotone
+					, int   bMono			// Monotone
 					)
 {
 	return DrawExt(pTex, pRct, (VEC2*)pScl, NULL, 0, (VEC2*)pTrn, dColor, bMono);
 }
 
-INT CLcSpriteX::DrawEx( void* pTex			// Texture
+int CLcSpriteX::DrawEx( void* pTex			// Texture
 						, RECT* pRct		// Draw Region
 						, void* pScl		// Scaling
 						, void* pTrn		// Position
 						, void* pRot		// Rotation Center
 						, FLOAT	fAngle		// Rotation Angle(Radian)
 						, DWORD dColor		// color
-						, INT   bMono		// Monotone
+						, int   bMono		// Monotone
 						)
 {
 	return DrawExt(pTex, pRct, (VEC2*)pScl, (VEC2*)pRot, fAngle, (VEC2*)pTrn, dColor, bMono);
@@ -260,14 +260,14 @@ INT CLcSpriteX::DrawEx( void* pTex			// Texture
 
 
 
-INT CLcSpriteX::DrawExt(  void* pTex
+int CLcSpriteX::DrawExt(  void* pTex
 						, RECT* pRct
 						, VEC2* pScl
 						, VEC2* pRot
 						, FLOAT fRot
 						, VEC2* pTrn
 						, DWORD dColor
-						, INT bMono)
+						, int bMono)
 {
 	HRESULT hr=0;
 
@@ -467,13 +467,13 @@ INT CLcSpriteX::DrawExt(  void* pTex
 }
 
 
-void CLcSpriteX::AlphaOption(INT opt)
+void CLcSpriteX::AlphaOption(int opt)
 {
 	m_Alphblend = opt;
 }
 
 
-INT LcDev_SpriteCreate(char* sCmd
+int LcDev_SpriteCreate(char* sCmd
 					, ILcSpriteX** pData
 					, void* p1
 					, void* p2

@@ -30,7 +30,7 @@ void	SpLib_SetMouse( int (*_Mouse)(int x, int y, int z, int _event) );		// 게�
 
 DWORD	SpLib_ElapsedTime();
 
-BYTE*	SpLib_GetKeyboard();													// 키보드(0~255)
+unsigned char*	SpLib_GetKeyboard();													// 키보드(0~255)
 int		SpLib_GetMouseX();														// 마우스 위치 X
 int		SpLib_GetMouseY();														// 마우스 위치 Y
 int		SpLib_GetMouseZ();														// 마우스 위치 Z
@@ -55,7 +55,7 @@ int		SpLib_TextureRelease(int _nKey);										// 이미지 파일 해제
 int		SpLib_TextureWidth(int _nKey);											// 이미지 파일 너비
 int		SpLib_TextureHeight(int _nKey);											// 이미지 파일 높이
 
-int		SpLib_Draw2D(INT _nKey
+int		SpLib_Draw2D(int _nKey
 					 , RECT* pSrcRect
 					 , VEC2* pTranslate=NULL
 					 , VEC2* pScaling=NULL
@@ -64,7 +64,7 @@ int		SpLib_Draw2D(INT _nKey
 					 , DWORD dC=0xFFFFFFFF);									// 이미지 파일 그리기
 
 
-int		SpLib_FontCreate(char* sName, LONG iH, BYTE iItalic=0);
+int		SpLib_FontCreate(char* sName, LONG iH, unsigned char iItalic=0);
 
 
 int		SpLib_FontDrawText(int nIdx

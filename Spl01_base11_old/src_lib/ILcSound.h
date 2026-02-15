@@ -18,18 +18,18 @@ interface	ILcSound
 {
 	virtual	~ILcSound(){};
 
-	virtual	INT		Create(void* p1=NULL,void* p2=NULL,void* p3=NULL,void* p4=NULL)=0;
+	virtual	int		Create(void* p1=NULL,void* p2=NULL,void* p3=NULL,void* p4=NULL)=0;
 	virtual	void	Destroy()=0;
-	virtual	INT		GetID()=0;
+	virtual	int		GetID()=0;
 
-	virtual	INT		Play()=0;
-	virtual	INT		Stop()=0;
-	virtual	INT		Reset()=0;
-	virtual INT		GetState()=0;
+	virtual	int		Play()=0;
+	virtual	int		Stop()=0;
+	virtual	int		Reset()=0;
+	virtual int		GetState()=0;
 };
 
 
-INT			LcDev_SoundCreate(char* sCmd
+int			LcDev_SoundCreate(char* sCmd
 					, ILcSound** pData
 					, void* p1=NULL		// char* : Sound File Name
 					, void* p2=NULL
@@ -37,8 +37,8 @@ INT			LcDev_SoundCreate(char* sCmd
 					, void* p4=NULL
 					);
 
-INT			LcDev_SoundInit(void* hWnd);
-ILcSound*	LcDev_SoundFind(INT nID);
+int			LcDev_SoundInit(void* hWnd);
+ILcSound*	LcDev_SoundFind(int nID);
 void		LcDev_SoundDestroy();
 
 }//namespace LcsLib

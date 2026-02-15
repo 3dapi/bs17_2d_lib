@@ -21,7 +21,7 @@
 #include "SpLib.h"
 
 
-LRESULT CALLBACK WndProc(HWND hWnd,UINT uMsg,WPARAM wParam,LPARAM lParam);
+LRESULT CALLBACK WndProc(HWND hWnd,unsigned int uMsg,WPARAM wParam,LPARAM lParam);
 
 
 int		RenderEnv();
@@ -397,7 +397,7 @@ int Render2D()
 }
 
 
-LRESULT CALLBACK WndProc(HWND hWnd,UINT uMsg,WPARAM wParam,LPARAM lParam)
+LRESULT CALLBACK WndProc(HWND hWnd,unsigned int uMsg,WPARAM wParam,LPARAM lParam)
 {
 	WPARAM wHi = HIWORD(wParam);
 	WPARAM wLo = LOWORD(wParam);

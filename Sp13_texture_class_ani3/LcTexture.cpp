@@ -12,7 +12,7 @@
 
 LPDIRECT3DDEVICE9 CLcTexture::m_pDevice = NULL;
 
-INT LcDev_TextureInit(void* pDev)
+int LcDev_TextureInit(void* pDev)
 {
 	CLcTexture::m_pDevice = (LPDIRECT3DDEVICE9)pDev;
 	return 0;
@@ -54,12 +54,12 @@ void CLcTexture::Destroy()
 }
 
 
-INT CLcTexture::GetImageWidth()
+int CLcTexture::GetImageWidth()
 {
 	return m_Img.Width;
 }
 
-INT CLcTexture::GetImageHeight()
+int CLcTexture::GetImageHeight()
 {
 	return m_Img.Height;
 }
@@ -76,7 +76,7 @@ const char* CLcTexture::GetName()
 }
 
 
-INT CLcTexture::Create(void* p1, void* p2, void* p3, void* p4)
+int CLcTexture::Create(void* p1, void* p2, void* p3, void* p4)
 {
 	DWORD	dColorKey = 0x0;
 	
@@ -110,7 +110,7 @@ INT CLcTexture::Create(void* p1, void* p2, void* p3, void* p4)
 }
 
 
-INT LcDev_TextureCreate(char* sCmd, ILcTexture** pData, void* pTextureName, DWORD dColorKey)
+int LcDev_TextureCreate(char* sCmd, ILcTexture** pData, void* pTextureName, DWORD dColorKey)
 {
 	*pData = NULL;
 

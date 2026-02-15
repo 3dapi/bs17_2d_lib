@@ -100,8 +100,8 @@ void CLcModel2D::SetRect(void* rc)
 {
 	if(NULL == rc)
 	{
-		INT nW = m_AniTex->GetImageWidth();
-		INT nH = m_AniTex->GetImageHeight();
+		int nW = m_AniTex->GetImageWidth();
+		int nH = m_AniTex->GetImageHeight();
 		::SetRect(&m_ImgRc, 0,0, nW, nH);
 	}
 	else
@@ -110,7 +110,7 @@ void CLcModel2D::SetRect(void* rc)
 
 
 
-INT	CLcModel2D::FindAniIndex(INT* pOut/*Out*/, DWORD dTimeCur, DWORD dTimeBgn)
+int	CLcModel2D::FindAniIndex(int* pOut/*Out*/, DWORD dTimeCur, DWORD dTimeBgn)
 {
 	BOOL	nFind = -1;
 	
@@ -119,7 +119,7 @@ INT	CLcModel2D::FindAniIndex(INT* pOut/*Out*/, DWORD dTimeCur, DWORD dTimeBgn)
 	
 	dDelta = dTimeCur- dTimeBgn;
 	
-	for(INT i=0; i<m_AniTot; ++i)
+	for(int i=0; i<m_AniTot; ++i)
 	{
 		if( m_AniLst[i].dTime<=dDelta && dDelta < (m_AniLst[i].dTime+ m_AniDelta))
 		{
@@ -137,7 +137,7 @@ INT	CLcModel2D::FindAniIndex(INT* pOut/*Out*/, DWORD dTimeCur, DWORD dTimeBgn)
 }
 
 
-INT CLcModel2D::FindImageRect(void* pOut/*Out*/, INT nIndex)
+int CLcModel2D::FindImageRect(void* pOut/*Out*/, int nIndex)
 {
 	if( nIndex<0 || nIndex>=m_AniTot)
 		return -1;
@@ -149,7 +149,7 @@ INT CLcModel2D::FindImageRect(void* pOut/*Out*/, INT nIndex)
 
 
 
-INT CLcModel2D::Create(void* p1, void* p2, void* p3, void* p4)
+int CLcModel2D::Create(void* p1, void* p2, void* p3, void* p4)
 {
 	::strcpy(m_sFile, (char*)p1);
 
@@ -173,7 +173,7 @@ INT CLcModel2D::Create(void* p1, void* p2, void* p3, void* p4)
 	::fgets(sLine, 512, fp);
 	::sscanf(sLine, "%*s %ld", &m_AniDelta);
 
-	INT nCnt = 0;
+	int nCnt = 0;
 
 	while(!feof(fp))
 	{
@@ -219,7 +219,7 @@ void CLcModel2D::Render()
 
 
 
-INT LcDev_ModelCreate(char* sCmd, ILcModel** pData, void* pModelName)
+int LcDev_ModelCreate(char* sCmd, ILcModel** pData, void* pModelName)
 {
 	*pData = NULL;
 

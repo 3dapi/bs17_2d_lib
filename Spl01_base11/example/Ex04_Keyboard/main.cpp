@@ -13,7 +13,7 @@ int		iImgW;
 int		iImgH;
 int		nTx;
 
-BYTE	oldKey[256];
+unsigned char	oldKey[256];
 
 int Render()
 {
@@ -33,7 +33,7 @@ int FrameMove()
 	int mouseY = LcsLib_GetMouseY();
 	int mouseZ = LcsLib_GetMouseZ();
 
-	BYTE* pKey = (BYTE*)LcsLib_GetKeyboard();
+	unsigned char* pKey = (unsigned char*)LcsLib_GetKeyboard();
 
 
 	for(int i=0; i<256; ++i)

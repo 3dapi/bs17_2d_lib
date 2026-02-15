@@ -22,40 +22,40 @@ namespace LcsLib
 class CLcTexture : public ILcTexture
 {
 protected:
-	INT					m_nID;
+	int					m_nID;
 	char				m_sFile[128];
 	LPDIRECT3DTEXTURE9	m_pTex;
 	D3DXIMAGE_INFO		m_pImg;
 
-	INT					m_SrfW;
-	INT					m_SrfH;
+	int					m_SrfW;
+	int					m_SrfH;
 
 public:
 	CLcTexture();
 	virtual	~CLcTexture();
 
-	virtual	INT		Create(void* p1=NULL,void* p2=NULL,void* p3=NULL,void* p4=NULL);
+	virtual	int		Create(void* p1=NULL,void* p2=NULL,void* p3=NULL,void* p4=NULL);
 	virtual	void	Destroy();
-	virtual	INT		GetID();
+	virtual	int		GetID();
 
-	virtual	INT		GetImageWidth();
-	virtual	INT		GetImageHeight();
-	virtual	INT		GetSurfaceWidth();
-	virtual	INT		GetSurfaceHeight();
+	virtual	int		GetImageWidth();
+	virtual	int		GetImageHeight();
+	virtual	int		GetSurfaceWidth();
+	virtual	int		GetSurfaceHeight();
 
 	virtual	void*	GetTexture();
 	virtual	void	GetImageRect(void* rc);
 
 	char*	GetName();
 
-	static	INT					m_nIDTex;		// Texture ID
+	static	int					m_nIDTex;		// Texture ID
 	static	LPDIRECT3DDEVICE9	m_pDevice;		// Direct3DDevice
 };
 
 
 
 
-INT					CLcTexture::m_nIDTex	= 0;			// Texture ID
+int					CLcTexture::m_nIDTex	= 0;			// Texture ID
 LPDIRECT3DDEVICE9	CLcTexture::m_pDevice	= NULL;			// Direct3DDevice
 
 CLcTexture::CLcTexture()
@@ -72,12 +72,12 @@ CLcTexture::~CLcTexture()
 	Destroy();
 }
 
-INT CLcTexture::GetID()
+int CLcTexture::GetID()
 {
 	return m_nID;
 }
 
-INT CLcTexture::Create(void* p1,void* p2,void* p3,void* p4)
+int CLcTexture::Create(void* p1,void* p2,void* p3,void* p4)
 {
 	char*	sFile	= (char*)p1;
 	DWORD	dc		= *((DWORD*)p2);
@@ -110,7 +110,7 @@ INT CLcTexture::Create(void* p1,void* p2,void* p3,void* p4)
 
 	// 새로운 아이디 부여
 
-	INT _nID = CLcTexture::m_nIDTex;
+	int _nID = CLcTexture::m_nIDTex;
 	++_nID;
 
 	// overflow....
@@ -136,23 +136,23 @@ void CLcTexture::Destroy()
 }
 
 
-INT CLcTexture::GetImageWidth()
+int CLcTexture::GetImageWidth()
 {
 	return m_pImg.Width;
 }
 
-INT CLcTexture::GetImageHeight()
+int CLcTexture::GetImageHeight()
 {
 	return m_pImg.Height;
 }
 
 
-INT CLcTexture::GetSurfaceWidth()
+int CLcTexture::GetSurfaceWidth()
 {
 	return m_SrfW;
 }
 
-INT CLcTexture::GetSurfaceHeight()
+int CLcTexture::GetSurfaceHeight()
 {
 	return m_SrfH;
 }
@@ -184,7 +184,7 @@ typedef lsPDTX::iterator			itPDTX;
 lsPDTX	m_vTex;			// Texture List
 
 
-INT LcDev_TextureInit(void* pDev)
+int LcDev_TextureInit(void* pDev)
 {
 	CLcTexture::m_pDevice = (LPDIRECT3DDEVICE9)pDev;
 	return 0;
@@ -192,9 +192,9 @@ INT LcDev_TextureInit(void* pDev)
 
 void LcDev_TextureDestroy()
 {
-	INT iSize = m_vTex.size();
+	int iSize = m_vTex.size();
 
-	for(INT i=0; i<iSize; ++i)
+	for(int i=0; i<iSize; ++i)
 	{
 		SAFE_DELETE( m_vTex[i]	);
 	}
@@ -203,12 +203,12 @@ void LcDev_TextureDestroy()
 }
 
 
-ILcTexture* LcDev_TextureFind(INT _nID)
+ILcTexture* LcDev_TextureFind(int _nID)
 {
-	INT iSize = m_vTex.size();
-	INT	nIdx=-1;
+	int iSize = m_vTex.size();
+	int	nIdx=-1;
 
-	for(INT i=0; i<iSize; ++i)
+	for(int i=0; i<iSize; ++i)
 	{
 		if(m_vTex[i]->GetID() == _nID)
 		{
@@ -230,10 +230,10 @@ ILcTexture* LcDev_TextureFind(INT _nID)
 
 ILcTexture* LcDev_TextureFind(char* sFile)
 {
-	INT iSize = m_vTex.size();
-	INT	nIdx=-1;
+	int iSize = m_vTex.size();
+	int	nIdx=-1;
 
-	for(INT i=0; i<iSize; ++i)
+	for(int i=0; i<iSize; ++i)
 	{
 		ILcTexture* _pTex = m_vTex[i];
 		CLcTexture* pTex = (CLcTexture*)_pTex;
@@ -257,7 +257,7 @@ ILcTexture* LcDev_TextureFind(char* sFile)
 
 
 
-INT LcDev_TextureCreate(char* sCmd
+int LcDev_TextureCreate(char* sCmd
 					, ILcTexture** pData
 					, void* p1
 					, void* p2
@@ -302,7 +302,7 @@ INT LcDev_TextureCreate(char* sCmd
 
 
 
-INT	LcsLib_TextureLoad(char* sFileName, DWORD dc)
+int	LcsLib_TextureLoad(char* sFileName, DWORD dc)
 {
 	LcsLib::ILcTexture*	p = NULL;
 
@@ -316,12 +316,12 @@ INT	LcsLib_TextureLoad(char* sFileName, DWORD dc)
 }
 
 
-INT LcsLib_TextureRelease(INT _nID)
+int LcsLib_TextureRelease(int _nID)
 {
-	INT iSize = LcsLib::m_vTex.size();
-	INT	nIdx=-1;
+	int iSize = LcsLib::m_vTex.size();
+	int	nIdx=-1;
 
-	for(INT i=0; i<iSize; ++i)
+	for(int i=0; i<iSize; ++i)
 	{
 		if(LcsLib::m_vTex[i]->GetID() == _nID)
 		{
@@ -345,12 +345,12 @@ INT LcsLib_TextureRelease(INT _nID)
 	return iSize;
 }
 
-INT LcsLib_TextureWidth(INT _nID)
+int LcsLib_TextureWidth(int _nID)
 {
-	INT iSize = LcsLib::m_vTex.size();
-	INT	nIdx=-1;
+	int iSize = LcsLib::m_vTex.size();
+	int	nIdx=-1;
 
-	for(INT i=0; i<iSize; ++i)
+	for(int i=0; i<iSize; ++i)
 	{
 		if(LcsLib::m_vTex[i]->GetID() == _nID)
 		{
@@ -362,16 +362,16 @@ INT LcsLib_TextureWidth(INT _nID)
 	if(nIdx<0 || nIdx>=iSize)
 		return -1;
 
-	return (INT)LcsLib::m_vTex[nIdx]->GetImageWidth();
+	return (int)LcsLib::m_vTex[nIdx]->GetImageWidth();
 }
 
 
-INT LcsLib_TextureHeight(INT _nID)
+int LcsLib_TextureHeight(int _nID)
 {
-	INT iSize = LcsLib::m_vTex.size();
-	INT	nIdx=-1;
+	int iSize = LcsLib::m_vTex.size();
+	int	nIdx=-1;
 
-	for(INT i=0; i<iSize; ++i)
+	for(int i=0; i<iSize; ++i)
 	{
 		if(LcsLib::m_vTex[i]->GetID() == _nID)
 		{
@@ -383,7 +383,7 @@ INT LcsLib_TextureHeight(INT _nID)
 	if(nIdx<0 || nIdx>=iSize)
 		return -1;
 
-	return (INT)LcsLib::m_vTex[nIdx]->GetImageHeight();
+	return (int)LcsLib::m_vTex[nIdx]->GetImageHeight();
 }
 
 

@@ -39,8 +39,8 @@ public:
     MMIOINFO      m_mmioinfoOut;
     DWORD         m_dwFlags;
     BOOL          m_bIsReadingFromMemory;
-    BYTE*         m_pbData;
-    BYTE*         m_pbDataCur;
+    unsigned char*         m_pbData;
+    unsigned char*         m_pbDataCur;
     ULONG         m_ulDataSize;
     CHAR*         m_pResourceBuffer;
 
@@ -53,11 +53,11 @@ public:
     ~CWaveFile();
 
     HRESULT Open( LPTSTR strFileName, WAVEFORMATEX* pwfx, DWORD dwFlags );
-    HRESULT OpenFromMemory( BYTE* pbData, ULONG ulDataSize, WAVEFORMATEX* pwfx, DWORD dwFlags );
+    HRESULT OpenFromMemory( unsigned char* pbData, ULONG ulDataSize, WAVEFORMATEX* pwfx, DWORD dwFlags );
     HRESULT Close();
 
-    HRESULT Read( BYTE* pBuffer, DWORD dwSizeToRead, DWORD* pdwSizeRead );
-    HRESULT Write( UINT nSizeToWrite, BYTE* pbData, UINT* pnSizeWrote );
+    HRESULT Read( unsigned char* pBuffer, DWORD dwSizeToRead, DWORD* pdwSizeRead );
+    HRESULT Write( unsigned int nSizeToWrite, unsigned char* pbData, unsigned int* pnSizeWrote );
 
     DWORD   GetSize();
     HRESULT ResetFile();
@@ -143,7 +143,7 @@ public:
     HRESULT Get3DListenerInterface( LPDIRECTSOUND3DLISTENER* ppDSListener );
 
     HRESULT Create( CSound** ppSound, LPTSTR strWaveFileName, DWORD dwCreationFlags = 0, GUID guid3DAlgorithm = GUID_NULL, DWORD dwNumBuffers = 1 );
-    HRESULT CreateFromMemory( CSound** ppSound, BYTE* pbData, ULONG ulDataSize, LPWAVEFORMATEX pwfx, DWORD dwCreationFlags = 0, GUID guid3DAlgorithm = GUID_NULL, DWORD dwNumBuffers = 1 );
+    HRESULT CreateFromMemory( CSound** ppSound, unsigned char* pbData, ULONG ulDataSize, LPWAVEFORMATEX pwfx, DWORD dwCreationFlags = 0, GUID guid3DAlgorithm = GUID_NULL, DWORD dwNumBuffers = 1 );
     HRESULT CreateStreaming( CStreamingSound** ppStreamingSound, LPTSTR strWaveFileName, DWORD dwCreationFlags, GUID guid3DAlgorithm, DWORD dwNotifyCount, DWORD dwNotifySize, HANDLE hNotifyEvent );
 };
 

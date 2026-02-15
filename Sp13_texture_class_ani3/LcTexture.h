@@ -17,12 +17,12 @@ public:
 	CLcTexture();
 	virtual ~CLcTexture();
 
-	virtual INT		Create(void* p1=NULL, void* p2=NULL, void* p3=NULL, void* p4=NULL);
+	virtual int		Create(void* p1=NULL, void* p2=NULL, void* p3=NULL, void* p4=NULL);
 	virtual void	Destroy();
 	virtual const char*	GetName();
 
-	virtual INT		GetImageWidth();
-	virtual INT		GetImageHeight();
+	virtual int		GetImageWidth();
+	virtual int		GetImageHeight();
 	virtual void*	GetTexture();
 
 	static LPDIRECT3DDEVICE9 m_pDevice;

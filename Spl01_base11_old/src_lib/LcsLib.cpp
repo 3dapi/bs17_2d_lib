@@ -28,18 +28,18 @@
 
 namespace LcsLib
 {
-INT					m_bActive = TRUE;
-INT					m_bCursor = TRUE;
-INT					m_bState  = TRUE;
+int					m_bActive = TRUE;
+int					m_bCursor = TRUE;
+int					m_bState  = TRUE;
 
 HINSTANCE			m_hInst;
 HWND				m_hWnd;
 char				m_sCls[512];
 
-INT					m_dScnX;
-INT					m_dScnY;
-INT					m_dScnW;
-INT					m_dScnH;
+int					m_dScnX;
+int					m_dScnY;
+int					m_dScnW;
+int					m_dScnH;
 
 DWORD				m_dWinStyle	= WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU| WS_VISIBLE;
 
@@ -53,83 +53,83 @@ DWORD				m_dTimeElapsed=0;
 
 ILcInput*			m_pInput;
 
-INT (*LcsLib_FrameMove2D)();
-INT (*LcsLib_Render2D)();
+int (*LcsLib_FrameMove2D)();
+int (*LcsLib_Render2D)();
 
-INT (*LcsLib_Keyboard)(BYTE* key);
-INT (*LcsLib_Mouse)(INT x, INT y, INT z, INT _event);
+int (*LcsLib_Keyboard)(unsigned char* key);
+int (*LcsLib_Mouse)(int x, int y, int z, int _event);
 
 }// namespace LcsLib
 
 
 
-INT LcsLib_DefaultFrameMove()	{	return 0;	}
-INT LcsLib_DefaultRender()		{	return 0;	}
-INT LcsLib_DefaultKeyboard(BYTE*){	return 0;	}
-INT LcsLib_DefaultMouse(INT, INT, INT, INT){	return 0;	}
+int LcsLib_DefaultFrameMove()	{	return 0;	}
+int LcsLib_DefaultRender()		{	return 0;	}
+int LcsLib_DefaultKeyboard(unsigned char*){	return 0;	}
+int LcsLib_DefaultMouse(int, int, int, int){	return 0;	}
 
-void LcsLib_SetFrameMove(INT (*v)() )
+void LcsLib_SetFrameMove(int (*v)() )
 {
 	LcsLib::LcsLib_FrameMove2D = v;
 }
 
 
-void LcsLib_SetRender(INT (*v)() )
+void LcsLib_SetRender(int (*v)() )
 {
 	LcsLib::LcsLib_Render2D = v;
 }
 
 
 
-void LcsLib_SetKeyboard(INT (*v)(BYTE*) )
+void LcsLib_SetKeyboard(int (*v)(unsigned char*) )
 {
 	LcsLib::LcsLib_Keyboard	= v;
 }
 
-void LcsLib_SetMouse(INT (*v)(INT, INT, INT, INT) )
+void LcsLib_SetMouse(int (*v)(int, int, int, int) )
 {
 	LcsLib::LcsLib_Mouse = v;
 }
 
 
-const BYTE*	LcsLib_GetKeyboard()
+const unsigned char*	LcsLib_GetKeyboard()
 {
 	return LcsLib::m_pInput->GetKeyMap();
 }
 
-INT	LcsLib_GetMouseX()
+int	LcsLib_GetMouseX()
 {
 	const FLOAT* vcPos = LcsLib::m_pInput->GetMousePos();
-	return INT(vcPos[0]);
+	return int(vcPos[0]);
 }
 
-INT	LcsLib_GetMouseY()
+int	LcsLib_GetMouseY()
 {
 	const FLOAT* vcPos = LcsLib::m_pInput->GetMousePos();
-	return INT(vcPos[1]);
+	return int(vcPos[1]);
 }
 
-INT LcsLib_GetMouseZ()
+int LcsLib_GetMouseZ()
 {
 	const FLOAT* vcPos = LcsLib::m_pInput->GetMousePos();
-	return INT(vcPos[2]);
+	return int(vcPos[2]);
 }
 
-INT LcsLib_GetMouseEvent(INT nMouse)
+int LcsLib_GetMouseEvent(int nMouse)
 {
-	INT	nState = LcsLib::m_pInput->BtnState(nMouse);
+	int	nState = LcsLib::m_pInput->BtnState(nMouse);
 	return nState;
 }
 
 DWORD	LcsLib_GetWindowStyle()	{	return LcsLib::m_dWinStyle;			}
 HWND	LcsLib_GetHwnd()			{	return LcsLib::m_hWnd;				}
-INT		LcsLib_GetScnW()			{	return LcsLib::m_dScnW;				}
-INT		LcsLib_GetScnH()			{	return LcsLib::m_dScnH;				}
+int		LcsLib_GetScnW()			{	return LcsLib::m_dScnW;				}
+int		LcsLib_GetScnH()			{	return LcsLib::m_dScnH;				}
 
 
 void	LcsLib_SetWindowStyle(DWORD dSty)	{	LcsLib::m_dWinStyle		= dSty;		}
-void	LcsLib_SetStateShow(INT _bShow)		{	LcsLib::m_bState		= _bShow;	}
-void	LcsLib_SetCursorShow(INT _bShow)
+void	LcsLib_SetStateShow(int _bShow)		{	LcsLib::m_bState		= _bShow;	}
+void	LcsLib_SetCursorShow(int _bShow)
 {
 	LcsLib::m_bCursor		= _bShow;
 	ShowCursor(LcsLib::m_bCursor);
@@ -157,7 +157,7 @@ void LcsLib_SetWindowTitle(const char *format, ...)
 
 
 
-INT LcsLib_Draw2D(INT _nID
+int LcsLib_Draw2D(int _nID
 				  , RECT* pSrcRect
 				  , VEC2* pTranslation
 				  , VEC2* pScaling
@@ -165,7 +165,7 @@ INT LcsLib_Draw2D(INT _nID
 				  , FLOAT fAngle
 				  , DWORD dC)
 {
-	INT	hr=-1;
+	int	hr=-1;
 
 
 	LcsLib::ILcTexture* pTex = LcsLib::LcDev_TextureFind(_nID);
@@ -227,7 +227,7 @@ INT LcsLib_Draw2D(INT _nID
 
 
 
-INT FrameMove2D()
+int FrameMove2D()
 {
 	LcsLib::m_dTimeElapsed = ::timeGetTime() - LcsLib::m_dTimeBgn;
 
@@ -239,7 +239,7 @@ INT FrameMove2D()
 }
 
 
-INT Render3D()
+int Render3D()
 {
 	LcsLib::m_pd3dDevice->Clear( 0
 						, NULL
@@ -263,7 +263,7 @@ INT Render3D()
 }
 
 
-LRESULT CALLBACK WndProc(HWND hWnd,UINT uMsg,WPARAM wParam,LPARAM lParam)
+LRESULT CALLBACK WndProc(HWND hWnd,unsigned int uMsg,WPARAM wParam,LPARAM lParam)
 {
 	WPARAM wHi = HIWORD(wParam);
 	WPARAM wLo = LOWORD(wParam);
@@ -288,7 +288,7 @@ LRESULT CALLBACK WndProc(HWND hWnd,UINT uMsg,WPARAM wParam,LPARAM lParam)
 
 
 
-INT LcsLib_CreateWin(INT x,INT y,INT ScnW,INT ScnH,char* sName,INT bFull)
+int LcsLib_CreateWin(int x,int y,int ScnW,int ScnH,char* sName,int bFull)
 {
 	LcsLib_SetFrameMove( LcsLib_DefaultFrameMove);
 	LcsLib_SetRender( LcsLib_DefaultRender );
@@ -398,14 +398,14 @@ INT LcsLib_CreateWin(INT x,INT y,INT ScnW,INT ScnH,char* sName,INT bFull)
 	return 0;
 }
 
-INT LcsLib_ChangeWindow(INT bFull)
+int LcsLib_ChangeWindow(int bFull)
 {
 	return -1;
 }
 
 void LcsLib_DestroyWin()
 {
-	INT i=0;
+	int i=0;
 	
 	LcsLib::LcDev_FontDestroy();
 	LcsLib::LcDev_TextureDestroy();
@@ -419,11 +419,11 @@ void LcsLib_DestroyWin()
 }
 
 
-INT	LcsLib_Run()
+int	LcsLib_Run()
 {
-	INT hr;
+	int hr;
 
-	INT bGotMsg = FALSE;
+	int bGotMsg = FALSE;
     MSG  msg;
     msg.message = WM_NULL;
     PeekMessage( &msg, NULL, 0U, 0U, PM_NOREMOVE );

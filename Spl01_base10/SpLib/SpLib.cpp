@@ -32,10 +32,10 @@ HINSTANCE			m_hInst;
 HWND				m_hWnd;
 char				m_sCls[512];
 
-INT					m_dScnX;
-INT					m_dScnY;
-INT					m_dScnW;
-INT					m_dScnH;
+int					m_dScnX;
+int					m_dScnY;
+int					m_dScnW;
+int					m_dScnH;
 
 DWORD				m_dWinStyle	= WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU| WS_VISIBLE;
 
@@ -49,78 +49,78 @@ DWORD				m_dTimeElapsed=0;
 
 ILcInput*			m_pInput;
 
-INT (*SpLib_FrameMove2D)();
-INT (*SpLib_Render2D)();
+int (*SpLib_FrameMove2D)();
+int (*SpLib_Render2D)();
 
-INT (*SpLib_Keyboard)(BYTE* key);
-INT (*SpLib_Mouse)(INT x, INT y, INT z, INT _event);
+int (*SpLib_Keyboard)(unsigned char* key);
+int (*SpLib_Mouse)(int x, int y, int z, int _event);
 
 }// namespace SpLib
 
 
 
-INT SpLib_DefaultFrameMove()	{	return 0;	}
-INT SpLib_DefaultRender()		{	return 0;	}
-INT SpLib_DefaultKeyboard(BYTE*){	return 0;	}
-INT SpLib_DefaultMouse(INT, INT, INT, INT){	return 0;	}
+int SpLib_DefaultFrameMove()	{	return 0;	}
+int SpLib_DefaultRender()		{	return 0;	}
+int SpLib_DefaultKeyboard(unsigned char*){	return 0;	}
+int SpLib_DefaultMouse(int, int, int, int){	return 0;	}
 
-void SpLib_SetFrameMove(INT (*v)() )
+void SpLib_SetFrameMove(int (*v)() )
 {
 	SpLib::SpLib_FrameMove2D = v;
 }
 
 
-void SpLib_SetRender(INT (*v)() )
+void SpLib_SetRender(int (*v)() )
 {
 	SpLib::SpLib_Render2D = v;
 }
 
 
 
-void SpLib_SetKeyboard(INT (*v)(BYTE*) )
+void SpLib_SetKeyboard(int (*v)(unsigned char*) )
 {
 	SpLib::SpLib_Keyboard	= v;
 }
 
-void SpLib_SetMouse(INT (*v)(INT, INT, INT, INT) )
+void SpLib_SetMouse(int (*v)(int, int, int, int) )
 {
 	SpLib::SpLib_Mouse = v;
 }
 
 
-const BYTE*	SpLib_GetKeyboard()
+const unsigned char*	SpLib_GetKeyboard()
 {
 	return SpLib::m_pInput->GetKeyMap();
 }
 
-INT	SpLib_GetMouseX()
+int	SpLib_GetMouseX()
 {
 	const FLOAT* vcPos = SpLib::m_pInput->GetMousePos();
-	return INT(vcPos[0]);
+	return int(vcPos[0]);
 }
 
-INT	SpLib_GetMouseY()
+int	SpLib_GetMouseY()
 {
 	const FLOAT* vcPos = SpLib::m_pInput->GetMousePos();
-	return INT(vcPos[1]);
+	return int(vcPos[1]);
 }
 
-INT SpLib_GetMouseZ()
+int SpLib_GetMouseZ()
 {
 	const FLOAT* vcPos = SpLib::m_pInput->GetMousePos();
-	return INT(vcPos[2]);
+	return int(vcPos[2]);
 }
 
-INT SpLib_GetMouseEvent(INT nMouse)
+int SpLib_GetMouseEvent(int nMouse)
 {
-	INT	nState = SpLib::m_pInput->BtnState(nMouse);
+	int	nState = SpLib::m_pInput->BtnState(nMouse);
 	return nState;
 }
 
 DWORD	SpLib_GetWindowStyle()	{	return SpLib::m_dWinStyle;			}
 HWND	SpLib_GetHwnd()			{	return SpLib::m_hWnd;				}
-INT		SpLib_GetScnW()			{	return SpLib::m_dScnW;				}
-INT		SpLib_GetScnH()			{	return SpLib::m_dScnH;				}
+int		SpLib_GetScnW()			{	return SpLib::m_dScnW;				}
+int		SpLib_GetScnH()			{	return SpLib::m_dScnH;				}
 
 
 void	SpLib_SetWindowStyle(DWORD dSty)	{	SpLib::m_dWinStyle		= dSty;		}
@@ -146,7 +146,7 @@ void SpLib_SetWindowTitle(const char *format, ...)
 
 
 
-INT SpLib_Draw2D(INT _nID
+int SpLib_Draw2D(int _nID
 				  , RECT* pSrcRect
 				  , VEC2* pTranslation
 				  , VEC2* pScaling
@@ -154,7 +154,7 @@ INT SpLib_Draw2D(INT _nID
 				  , FLOAT fAngle
 				  , DWORD dC)
 {
-	INT	hr=-1;
+	int	hr=-1;
 
 
 	SpLib::ILcTexture* pTex = SpLib::LcDev_TextureFind(_nID);
@@ -175,7 +175,7 @@ INT SpLib_Draw2D(INT _nID
 }
 
 
-INT FrameMove2D()
+int FrameMove2D()
 {
 	SpLib::m_dTimeElapsed = ::timeGetTime() - SpLib::m_dTimeBgn;
 
@@ -187,7 +187,7 @@ INT FrameMove2D()
 }
 
 
-INT Render3D()
+int Render3D()
 {
 	SpLib::m_pd3dDevice->Clear( 0
 						, NULL
@@ -211,7 +211,7 @@ INT Render3D()
 }
 
 
-LRESULT CALLBACK WndProc(HWND hWnd,UINT uMsg,WPARAM wParam,LPARAM lParam)
+LRESULT CALLBACK WndProc(HWND hWnd,unsigned int uMsg,WPARAM wParam,LPARAM lParam)
 {
 	WPARAM wHi = HIWORD(wParam);
 	WPARAM wLo = LOWORD(wParam);
@@ -236,7 +236,7 @@ LRESULT CALLBACK WndProc(HWND hWnd,UINT uMsg,WPARAM wParam,LPARAM lParam)
 
 
 
-INT SpLib_CreateWin(INT x,INT y,INT ScnW,INT ScnH,char* sName,bool bFull)
+int SpLib_CreateWin(int x,int y,int ScnW,int ScnH,char* sName,bool bFull)
 {
 	SpLib_SetFrameMove( SpLib_DefaultFrameMove);
 	SpLib_SetRender( SpLib_DefaultRender );
@@ -349,7 +349,7 @@ INT SpLib_CreateWin(INT x,INT y,INT ScnW,INT ScnH,char* sName,bool bFull)
 
 void SpLib_DestroyWin()
 {
-	INT i=0;
+	int i=0;
 	
 	SpLib::LcDev_FontDestroy();
 	SpLib::LcDev_TextureDestroy();
@@ -363,9 +363,9 @@ void SpLib_DestroyWin()
 }
 
 
-INT	SpLib_Run()
+int	SpLib_Run()
 {
-	INT hr;
+	int hr;
 
 	bool bGotMsg =false;
     MSG  msg;

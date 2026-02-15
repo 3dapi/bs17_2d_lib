@@ -24,7 +24,7 @@ int		mouseX;
 int		mouseY;
 int		mouseZ;
 
-BYTE*	pKey;
+unsigned char*	pKey;
 
 
 int		nSound1;
@@ -70,7 +70,7 @@ int FrameMove()
 	mouseY = LcsLib_GetMouseY();
 	mouseZ = LcsLib_GetMouseZ();
 
-	pKey = (BYTE*)LcsLib_GetKeyboard();
+	pKey = (unsigned char*)LcsLib_GetKeyboard();
 
 	
 	if(pKey[VK_LEFT] && !LcsLib_SoundIsPlaying(nSound1))

@@ -18,13 +18,13 @@ public:
 public:
 	HWND		m_hWnd;
 
-	BYTE		m_KeyCur[ILcInput::MAX_INPUT_KEY];	// 키보드 현재 상태
-	BYTE		m_KeyOld[ILcInput::MAX_INPUT_KEY];	// 키보드 이전 상태
-	BYTE		m_KeyMap[ILcInput::MAX_INPUT_KEY];	// 키보드 맵
+	unsigned char		m_KeyCur[ILcInput::MAX_INPUT_KEY];	// 키보드 현재 상태
+	unsigned char		m_KeyOld[ILcInput::MAX_INPUT_KEY];	// 키보드 이전 상태
+	unsigned char		m_KeyMap[ILcInput::MAX_INPUT_KEY];	// 키보드 맵
 
-	BYTE		m_BtnCur[ILcInput::MAX_INPUT_BTN];	// 마우스 현재 상태
-	BYTE		m_BtnOld[ILcInput::MAX_INPUT_BTN];	// 마우스 이전 상태
-	BYTE		m_BtnMap[ILcInput::MAX_INPUT_BTN];	// 마우스 맵
+	unsigned char		m_BtnCur[ILcInput::MAX_INPUT_BTN];	// 마우스 현재 상태
+	unsigned char		m_BtnOld[ILcInput::MAX_INPUT_BTN];	// 마우스 이전 상태
+	unsigned char		m_BtnMap[ILcInput::MAX_INPUT_BTN];	// 마우스 맵
 
 	D3DXVECTOR3	m_vcCur;					// 휠 마우스 Z
 	D3DXVECTOR3 m_vcOld;
@@ -32,34 +32,34 @@ public:
 
 	DWORD		m_dTimeDC;					// Double Click Time Interval
 	DWORD		m_dBtnBgn[ILcInput::MAX_INPUT_BTN];	// Double Click Start
-	INT			m_dBtnCnt[ILcInput::MAX_INPUT_BTN];	// Double Click Count
+	int			m_dBtnCnt[ILcInput::MAX_INPUT_BTN];	// Double Click Count
 
 
 public:
 	CLcInput();
 	virtual ~CLcInput();
 
-	virtual	INT		Create(void* p1=NULL,void* p2=NULL,void* p3=NULL,void* p4=NULL);
-	virtual INT		FrameMove();
+	virtual	int		Create(void* p1=NULL,void* p2=NULL,void* p3=NULL,void* p4=NULL);
+	virtual int		FrameMove();
 	virtual void	Destroy();
-	virtual LRESULT	MsgProc(HWND,UINT,WPARAM,LPARAM);
+	virtual LRESULT	MsgProc(HWND,unsigned int,WPARAM,LPARAM);
 
 public:
-	virtual BOOL	KeyDown	(INT nKey);
-	virtual BOOL	KeyUp	(INT nKey);
-	virtual BOOL	KeyPress(INT nKey);
-	virtual INT		KeyState(INT nKey);
+	virtual BOOL	KeyDown	(int nKey);
+	virtual BOOL	KeyUp	(int nKey);
+	virtual BOOL	KeyPress(int nKey);
+	virtual int		KeyState(int nKey);
 
-	virtual BOOL	BtnDown	 (INT nBtn);
-	virtual BOOL	BtnUp	 (INT nBtn);
-	virtual BOOL	BtnPress (INT nBtn);
-	virtual INT		BtnState (INT nBtn);
+	virtual BOOL	BtnDown	 (int nBtn);
+	virtual BOOL	BtnUp	 (int nBtn);
+	virtual BOOL	BtnPress (int nBtn);
+	virtual int		BtnState (int nBtn);
 
 	virtual const FLOAT* GetMousePos();
 	virtual const FLOAT* GetMouseEps();
 
-	virtual const BYTE* GetKeyMap();
-	virtual const BYTE* GetBtnMap();
+	virtual const unsigned char* GetKeyMap();
+	virtual const unsigned char* GetBtnMap();
 };
 
 

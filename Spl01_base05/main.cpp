@@ -42,7 +42,7 @@ int FrameMove()
 	int mouseY = SpLib_GetMouseY();
 	int mouseZ = SpLib_GetMouseZ();
 
-	BYTE* pKey = SpLib_GetKeyboard();
+	unsigned char* pKey = SpLib_GetKeyboard();
 
 
 	m_dTimeEnd	= SpLib_ElapsedTime();

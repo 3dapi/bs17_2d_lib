@@ -9,7 +9,7 @@
 #include "SpLib.h"
 
 
-LRESULT CALLBACK WndProc(HWND,UINT,WPARAM,LPARAM);
+LRESULT CALLBACK WndProc(HWND,unsigned int,WPARAM,LPARAM);
 int		RenderEnv();
 int		FrameMove2D();
 int		Render2D();
@@ -164,7 +164,7 @@ DWORD	SpLib_GetWindowStyle()				{	return m_dWinStyle;			}
 
 
 
-LRESULT CALLBACK WndProc(HWND hWnd,UINT uMsg,WPARAM wParam,LPARAM lParam)
+LRESULT CALLBACK WndProc(HWND hWnd,unsigned int uMsg,WPARAM wParam,LPARAM lParam)
 {
 	WPARAM wHi = HIWORD(wParam);
 	WPARAM wLo = LOWORD(wParam);

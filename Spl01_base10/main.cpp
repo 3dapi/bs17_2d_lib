@@ -32,7 +32,7 @@ int		mouseX;
 int		mouseY;
 int		mouseZ;
 
-const BYTE*	pKey;
+const unsigned char*	pKey;
 
 
 int FrameMove()

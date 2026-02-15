@@ -54,15 +54,15 @@ void CGameObject::SetPos(const FLOAT* pPos)
 }
 
 
-INT CGameObject::Create()
+int CGameObject::Create()
 {
 	return 0;
 }
 
 
-INT CGameObject::FrameMove()
+int CGameObject::FrameMove()
 {
-	INT		nIndex = -1;
+	int		nIndex = -1;
 	
 	m_dTimeCur	= timeGetTime();
 
@@ -102,7 +102,7 @@ void CGameObject::Render()
 
 
 
-INT CGameObject::SetModel(char* sModel)
+int CGameObject::SetModel(char* sModel)
 {
 	if(FAILED(LcDev_ModelCreate("File", &m_pModel, sModel)))
 		return -1;

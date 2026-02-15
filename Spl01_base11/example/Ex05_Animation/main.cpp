@@ -37,7 +37,7 @@ int FrameMove()
 	g_mouseX = LcsLib_GetMouseX();
 	g_mouseY = LcsLib_GetMouseY();
 	g_mouseZ = LcsLib_GetMouseZ();
-	BYTE* pKey = (BYTE*)LcsLib_GetKeyboard();
+	unsigned char* pKey = (unsigned char*)LcsLib_GetKeyboard();
 
 
 	// Get the current time

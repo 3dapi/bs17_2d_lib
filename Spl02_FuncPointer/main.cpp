@@ -7,24 +7,24 @@
 // 게임라이브러리에서 사용되는 함수 포인터
 
 // 함수 포인터 변수
-INT		(*g_pFncInit)(int, char);
+int		(*g_pFncInit)(int, char);
 void	(*g_pFncDestroy)();
-INT		(*g_pFncRender)();
+int		(*g_pFncRender)();
 
 // 함수 포인터 설정 함수
-void	SetEngineInit(INT (*)(int, char)  );
+void	SetEngineInit(int (*)(int, char)  );
 void	SetEngineDestroy(void (*)()  );
-void	SetEngineRender(INT (*)()  );
+void	SetEngineRender(int (*)()  );
 
-INT		EngineInit();
-INT		EngineDestroy();
-INT		EngineRender();
+int		EngineInit();
+int		EngineDestroy();
+int		EngineRender();
 
 
 ////////////////////////////////////////////////////////////////////////////////
 // 사용자 프로그램
 
-INT	UserInit(int d)
+int	UserInit(int d)
 {
 	printf("User Data Init: %d\n", d);
 	return 0;
@@ -51,7 +51,7 @@ int UserRender()
 void main()
 {
 
-	SetEngineInit		( (INT (*)(int,char))UserInit	);
+	SetEngineInit		( (int (*)(int,char))UserInit	);
 	SetEngineDestroy	( UserDestroy	);
 	SetEngineRender		( UserRender	);
 
@@ -76,7 +76,7 @@ void main()
 ////////////////////////////////////////////////////////////////////////////////
 // 게임 라이브러리에서의 구현 코드
 
-INT EngineInit()
+int EngineInit()
 {
 	printf("Game Engine EngineInit\n");
 
@@ -89,7 +89,7 @@ INT EngineInit()
 	return 0;
 }
 
-INT EngineDestroy()
+int EngineDestroy()
 {
 	if(g_pFncDestroy)
 		g_pFncDestroy();
@@ -99,7 +99,7 @@ INT EngineDestroy()
 }
 
 
-INT EngineRender()
+int EngineRender()
 {
 	printf("Game Engine Redering preparation\n");
 
@@ -110,7 +110,7 @@ INT EngineRender()
 }
 
 
-void SetEngineInit(INT (*pFnc)(int, char)  )
+void SetEngineInit(int (*pFnc)(int, char)  )
 {
 	g_pFncInit = pFnc;
 }
@@ -120,7 +120,7 @@ void SetEngineDestroy(void (*pFnc)()  )
 	g_pFncDestroy = pFnc;
 }
 
-void SetEngineRender(INT (*pFnc)()  )
+void SetEngineRender(int (*pFnc)()  )
 {
 	g_pFncRender = pFnc;
 }

@@ -39,7 +39,7 @@ int FrameMove()
 	m_MouseY = SpLib_GetMouseY();
 	m_MouseZ = SpLib_GetMouseZ();
 
-	BYTE* pKey = SpLib_GetKeyboard();
+	unsigned char* pKey = SpLib_GetKeyboard();
 
 	for(int i=0; i<256; ++i)
 	{

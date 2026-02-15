@@ -156,7 +156,7 @@
 <br>입력 받아 윈도우를 생성하고 그 결과를 반환합니다.
 <br>
 <pre>
-	Int SpLib_Run()
+	int SpLib_Run()
 	…
 		while(WM_QUIT != msg.message)
 		{
@@ -511,7 +511,7 @@
 		return SpLib_FrameMove2D();
 	}
 
-	LRESULT CALLBACK WndProc(HWND hWnd,UINT uMsg,WPARAM wParam,LPARAM lParam)
+	LRESULT CALLBACK WndProc(HWND hWnd,unsigned int uMsg,WPARAM wParam,LPARAM lParam)
 	…
 		WPARAM wHi = HIWORD(wParam);
 		…
@@ -815,7 +815,7 @@
 <br>벡터의 인덱스를 반환합니다.
 <br>
 <pre>
-	int SpLib_FontCreate(char* sName, LONG iH, BYTE iItalic)
+	int SpLib_FontCreate(char* sName, LONG iH, unsigned char iItalic)
 	{
 		ID3DXFont*	pD3DXFont;
 		D3DXFONT_DESC hFont =
@@ -841,7 +841,7 @@
 <br>폰트의 개체를 바로 접근해서 화면에 출력을 합니다.
 <br>
 <pre>
-	Int SpLib_FontDrawText(int nIdx,…, , const char *format,…)
+	int SpLib_FontDrawText(int nIdx,…, , const char *format,…)
 	…
 		va_list ap;
 		char s[1024];

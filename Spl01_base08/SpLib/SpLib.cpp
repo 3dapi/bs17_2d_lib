@@ -115,7 +115,7 @@ LPD3DXSPRITE		m_pd3dSprite;			// 2D Sprite
 
 DWORD				m_dColor = 0xFF006699;
 
-BYTE				m_KeyCur[256];
+unsigned char				m_KeyCur[256];
 int					m_mouseX;
 int					m_mouseY;
 int					m_mouseZ;
@@ -135,7 +135,7 @@ int (*SpLib_FrameMove2D)();
 int (*SpLib_Render2D)();
 
 
-int (*SpLib_Keyboard)(BYTE* key);
+int (*SpLib_Keyboard)(unsigned char* key);
 int (*SpLib_Mouse)(int x, int y, int z, int _event);
 
 
@@ -152,7 +152,7 @@ int SpLib_DefaultRender()
 	return 0;
 }
 
-int SpLib_DefaultKeyboard(BYTE* key)
+int SpLib_DefaultKeyboard(unsigned char* key)
 {
 	//printf("SpLib_Default Keyboard\n");
 	return 0;
@@ -179,7 +179,7 @@ void SpLib_SetRender(int (*_Render)() )
 
 
 
-void SpLib_SetKeyboard(int (*_Keyboard)(BYTE* key) )
+void SpLib_SetKeyboard(int (*_Keyboard)(unsigned char* key) )
 {
 	SpLib_Keyboard	= _Keyboard;
 }
@@ -192,7 +192,7 @@ void SpLib_SetMouse(int (*_Mouse)(int x, int y, int z, int _event) )
 
 
 
-BYTE*	SpLib_GetKeyboard()		{	return m_KeyCur;			}
+unsigned char*	SpLib_GetKeyboard()		{	return m_KeyCur;			}
 int		SpLib_GetMouseX()		{	return m_mouseX;			}
 int		SpLib_GetMouseY()		{	return m_mouseY;			}
 int		SpLib_GetMouseZ()		{	return m_mouseZ;			}
@@ -328,7 +328,7 @@ int SpLib_TextureHeight(int _nKey)
 }
 
 
-int		SpLib_FontCreate(char* sName, LONG iH, BYTE iItalic)
+int		SpLib_FontCreate(char* sName, LONG iH, unsigned char iItalic)
 {
 	ID3DXFont*	pD3DXFont;
 
@@ -629,7 +629,7 @@ int Render3D()
 }
 
 
-LRESULT CALLBACK WndProc(HWND hWnd,UINT uMsg,WPARAM wParam,LPARAM lParam)
+LRESULT CALLBACK WndProc(HWND hWnd,unsigned int uMsg,WPARAM wParam,LPARAM lParam)
 {
 	WPARAM wHi = HIWORD(wParam);
 	WPARAM wLo = LOWORD(wParam);
@@ -766,7 +766,7 @@ int SpLib_CreateWin(int x,int y,int ScnW,int ScnH,char* sName,bool bFull)
 	}
 
 
-	BYTE	sKey[256]={0};
+	unsigned char	sKey[256]={0};
 	::SetKeyboardState(sKey);
 
 	m_pSndMn = new CSoundManager;

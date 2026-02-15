@@ -32,8 +32,8 @@ struct UserInput
 	int		mouseX;
 	int		mouseY;
 	int		mouseZ;
-	BYTE	pKeyNew[256];
-	BYTE	pKeyOld[256];
+	unsigned char	pKeyNew[256];
+	unsigned char	pKeyOld[256];
 
 	UserInput()
 	{

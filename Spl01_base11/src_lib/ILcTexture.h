@@ -18,18 +18,18 @@ interface	ILcTexture
 {
 	virtual	~ILcTexture(){};
 
-	virtual	INT		GetID()=0;
+	virtual	int		GetID()=0;
 
-	virtual	INT		GetImageWidth()=0;
-	virtual	INT		GetImageHeight()=0;
-	virtual	INT		GetSurfaceWidth()=0;
-	virtual	INT		GetSurfaceHeight()=0;
+	virtual	int		GetImageWidth()=0;
+	virtual	int		GetImageHeight()=0;
+	virtual	int		GetSurfaceWidth()=0;
+	virtual	int		GetSurfaceHeight()=0;
 	virtual	void*	GetTexture()=0;
 	virtual	void	GetImageRect(void* rc)=0;
 };
 
 
-INT	LcDev_TextureCreate(char* sCmd
+int	LcDev_TextureCreate(char* sCmd
 					, ILcTexture** pData
 					, void* p1=NULL
 					, void* p2=NULL
@@ -38,8 +38,8 @@ INT	LcDev_TextureCreate(char* sCmd
 					);
 
 
-INT			LcDev_TextureInit(void* pd3dDevice);
-ILcTexture*	LcDev_TextureFind(INT nID);
+int			LcDev_TextureInit(void* pd3dDevice);
+ILcTexture*	LcDev_TextureFind(int nID);
 void		LcDev_TextureDestroy();
 
 }//namespace LcsLib
