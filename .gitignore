@@ -1,14 +1,15 @@
 ########################################
 # unreal
 Binaries/
+Build/
 DerivedDataCache/
 Intermediate/
 Saved/
-Content/__ExternalActors__
-Content/__ExternalObjects__
 Plugins/*/Intermediate/
 Plugins/*/Binaries/
-
+StarterContent/
+*/Content/ThirdPerson/
+*/Content/Characters/
 
 ########################################
 # svn
@@ -25,12 +26,14 @@ packages/
 .vs/
 .vscode/
 .tlog/
+UpgradeLog.htm
 *.tlog
 *.idb
 *.ilk
 *.recipe
 *.log
 *.obj
+*.pdb
 *.sln.docstates
 *.user
 *.userosscache
